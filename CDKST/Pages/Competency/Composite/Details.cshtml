@@ -1,0 +1,31 @@
+@page
+@model CDKST.Pages_Competency_Composite.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Composite</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Composite.term_identifier)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Composite.term_identifier)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Composite.prose_task_statement)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Composite.prose_task_statement)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Composite.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

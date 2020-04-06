@@ -1,0 +1,45 @@
+@page
+@model CDKST.Pages_Knowledge_Dictionary.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>KnowledgeDictionary</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="KnowledgeDictionary.ID" />
+            <div class="form-group">
+                <label asp-for="KnowledgeDictionary.category" class="control-label"></label>
+                <input asp-for="KnowledgeDictionary.category" class="form-control" />
+                <span asp-validation-for="KnowledgeDictionary.category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KnowledgeDictionary.discipline" class="control-label"></label>
+                <input asp-for="KnowledgeDictionary.discipline" class="form-control" />
+                <span asp-validation-for="KnowledgeDictionary.discipline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KnowledgeDictionary.description" class="control-label"></label>
+                <input asp-for="KnowledgeDictionary.description" class="form-control" />
+                <span asp-validation-for="KnowledgeDictionary.description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

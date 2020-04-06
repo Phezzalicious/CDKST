@@ -1,0 +1,43 @@
+@page
+@model CDKST.Pages_Disposition_Applied.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>DispositionApplied</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DispositionApplied.category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DispositionApplied.category)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DispositionApplied.discipline)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DispositionApplied.discipline)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DispositionApplied.description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DispositionApplied.description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DispositionApplied.location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DispositionApplied.location)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.DispositionApplied.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

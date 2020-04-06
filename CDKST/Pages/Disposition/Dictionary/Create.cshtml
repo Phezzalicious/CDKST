@@ -1,0 +1,44 @@
+@page
+@model CDKST.Pages_Disposition_Dictionary.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>DispositionDictionary</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DispositionDictionary.category" class="control-label"></label>
+                <input asp-for="DispositionDictionary.category" class="form-control" />
+                <span asp-validation-for="DispositionDictionary.category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DispositionDictionary.discipline" class="control-label"></label>
+                <input asp-for="DispositionDictionary.discipline" class="form-control" />
+                <span asp-validation-for="DispositionDictionary.discipline" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DispositionDictionary.description" class="control-label"></label>
+                <input asp-for="DispositionDictionary.description" class="form-control" />
+                <span asp-validation-for="DispositionDictionary.description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

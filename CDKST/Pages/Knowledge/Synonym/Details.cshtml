@@ -1,0 +1,31 @@
+@page
+@model CDKST.Pages_Knowledge_Synonym.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>KnowledgeSynonym</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KnowledgeSynonym.text)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KnowledgeSynonym.text)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KnowledgeSynonym.language)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KnowledgeSynonym.language)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.KnowledgeSynonym.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

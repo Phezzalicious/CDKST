@@ -1,0 +1,46 @@
+@page
+@model CDKST.Pages_Disposition_Applied.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DispositionApplied</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DispositionApplied.category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DispositionApplied.category)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DispositionApplied.discipline)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DispositionApplied.discipline)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DispositionApplied.description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DispositionApplied.description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DispositionApplied.location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DispositionApplied.location)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="DispositionApplied.ID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,160 @@
+sudo nano /etc/nginx/sites-available/junkiard.com
+
+142.93.247.34
+
+
+sudo ln -s /etc/nginx/sites-available/junkiard.com /etc/nginx/sites-enabled/
+
+sudo nano /etc/nginx/sites-available/junkiard.com
+
+
+
+sudo add-apt-repository ppa:certbot/certbot
+
+
+sudo certbot --nginx -d junkiard.com -d www.junkiard.com
+ scp publish/ phelps@junkiard.com:/home/phelps/uploads
+ 
+ git remote add origin https://phezzalicious@bitbucket.org/phezzalicious/cdkst-dotnet.git
+
+
+
+//ORDER OF CREATION
+dotnet aspnet-codegenerator razorpage -m SkillVerbSynonym -dc CDKSTContext -udl -outDir Pages/Skill/VerbSynonym --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m SkillLevel -dc CDKSTContext -udl -outDir Pages/Skill/Level --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m SkillDictionary -dc CDKSTContext -udl -outDir Pages/Skill/Dictionary --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m KnowledgeSynonym -dc CDKSTContext -udl -outDir Pages/Knowledge/Synonym --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m KnowledgeElement -dc CDKSTContext -udl -outDir Pages/Knowledge/Element --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m KnowledgeDictionary -dc CDKSTContext -udl -outDir Pages/Knowledge/Dictionary --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m DispositionSynonym -dc CDKSTContext -udl -outDir Pages/Disposition/Synonym --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m DispositionApplied -dc CDKSTContext -udl -outDir Pages/Disposition/Applied --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m DispositionInstance -dc CDKSTContext -udl -outDir Pages/Disposition/Instance --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m DispositionDictionary -dc CDKSTContext -udl -outDir Pages/Disposition/Dictionary --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m Composite -dc CDKSTContext -udl -outDir Pages/Competency/Composite --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m Atomic -dc CDKSTContext -udl -outDir Pages/Competency/Atomic --referenceScriptLibraries
+dotnet aspnet-codegenerator razorpage -m Task -dc CDKSTContext -udl -outDir Task --referenceScriptLibraries
+
+
+
+
+
+
+
+"CDKSTContext": "Server=localhost;User Id=cdkst-admin;Password=Padraab.95;Database=CDKSTDb"
+
+
+ sudo ln -s ~/projects/cdkst/bin/Release/netcoreapp3.1/publish
+
+
+
+
+
+dotnet aspnet-codegenerator razorpage -m Task -dc CDKSTContext -udl -outDir Task --referenceScriptLibraries
+
+//NOT DONE 
+
+
+domain referred back to digital ocean 
+domain as a nameserver on digital ocean 
+
+
+do digital ocean tutorial 
+follow microsofts instructions for microsofts key
+Get the current sdk not 2.2
+chown is change ownership 
+dont nano into appsettings.json
+build and publish
+do step 4 digital ocean
+comment on digital ocean by mikeg70
+
+
+
+
+
+
+
+
+
+
+#!/bin/sh
+cd ~
+cd projects/<projectName>
+sudo systemctl stop <serviceName>.service
+#sudo git reset --hard origin/master
+sudo git pull https://<username>:<password>@bitbucket.org/<username>/<project>.git
+sudo dotnet publish --configuration Release
+cd ~
+sudo systemctl start <serviceName>.service 
+
+
+
+"Server=localhost;User Id=cdkst-admin;Password=Padraab.95;Database=CdkstAppDb"
+
+"CDKSTContext": "Server=(localdb)\\mssqllocaldb;Database=CDKSTContext-5d3c73bf-abb7-437b-b6b4-b7f6a4c96668;Trusted_Connection=True;MultipleActiveResultSets=true"
+
+
+
+
+
+
+dotnet aspnet-codegenerator identity --dbContext CDKSTContext --useDefaultUI
+
+
+dotnet aspnet-codegenerator identity -u CdkstUser -fi Account.Register;Account.Manage.Index
+
+
+
+
+
+
+
+
+
+
+
+public DbSet<CDKST.Models.Skill.SkillVerbSynonym> SkillVerbSynonym { get; set; }
+
+        public DbSet<CDKST.Models.Skill.SkillLevel> SkillLevel { get; set; }
+
+        public DbSet<CDKST.Models.Skill.SkillDictionary> SkillDictionary { get; set; }
+
+        public DbSet<CDKST.Models.Knowledge.KnowledgeSynonym> KnowledgeSynonym { get; set; }
+
+        public DbSet<CDKST.Models.Knowledge.KnowledgeElement> KnowledgeElement { get; set; }
+
+        public DbSet<CDKST.Models.Knowledge.KnowledgeDictionary> KnowledgeDictionary { get; set; }
+
+        public DbSet<CDKST.Models.Disposition.DispositionSynonym> DispositionSynonym { get; set; }
+
+        public DbSet<CDKST.Models.Disposition.DispositionApplied> DispositionApplied { get; set; }
+
+        public DbSet<CDKST.Models.Disposition.DispositionInstance> DispositionInstance { get; set; }
+
+        public DbSet<CDKST.Models.Disposition.DispositionDictionary> DispositionDictionary { get; set; }
+
+        public DbSet<CDKST.Models.Competency.Composite> Composite { get; set; }
+
+        public DbSet<CDKST.Models.Competency.Atomic> Atomic { get; set; }
+
+         protected override void OnModelCreating(ModelBuilder builder){
+            builder.Entity<CDKST.Models.Skill.SkillVerbSynonym>().ToTable("SkillVerbSynonym");
+            builder.Entity<CDKST.Models.Skill.SkillLevel>().ToTable("SkillLevel");
+            builder.Entity<CDKST.Models.Skill.SkillDictionary>().ToTable("SkillDictionary");
+            builder.Entity<CDKST.Models.Knowledge.KnowledgeSynonym>().ToTable("KnowledgeSynonym");
+            builder.Entity<CDKST.Models.Knowledge.KnowledgeElement>().ToTable("KnowledgeElement");
+            builder.Entity<CDKST.Models.Knowledge.KnowledgeDictionary>().ToTable("KnowledgeDictionary");
+            builder.Entity<CDKST.Models.Disposition.DispositionSynonym>().ToTable("DispositionSynonym");
+            builder.Entity<CDKST.Models.Disposition.DispositionApplied>().ToTable("DispositionApplied");
+            builder.Entity<CDKST.Models.Disposition.DispositionInstance>().ToTable("DispositionInstance");
+            builder.Entity<CDKST.Models.Disposition.DispositionDictionary>().ToTable("DispositionDictionary");
+            builder.Entity<CDKST.Models.Task.Task>().ToTable("Task");
+            builder.Entity<CDKST.Models.Competency.Atomic>().ToTable("Atomic");
+            builder.Entity<CDKST.Models.Competency.Composite>().ToTable("Composite");
+         }
+    }
+
+
+
+
+    Account.Register;Account.Login;Account.Manage.Index
+    dotnet aspnet-codegenerator identity -dc CDKST.Data.IdentityContext --userClass Member --files "Account.Register;Account.Login;Account.Manage.Index" --useDefaultUI

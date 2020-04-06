@@ -1,0 +1,44 @@
+@page
+@model CDKST.Pages_Skill_Level.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SkillLevel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SkillLevel.term_identifier" class="control-label"></label>
+                <input asp-for="SkillLevel.term_identifier" class="form-control" />
+                <span asp-validation-for="SkillLevel.term_identifier" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkillLevel.cartesian_index" class="control-label"></label>
+                <input asp-for="SkillLevel.cartesian_index" class="form-control" />
+                <span asp-validation-for="SkillLevel.cartesian_index" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkillLevel.descriptor" class="control-label"></label>
+                <input asp-for="SkillLevel.descriptor" class="form-control" />
+                <span asp-validation-for="SkillLevel.descriptor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
