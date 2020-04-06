@@ -13,7 +13,7 @@ namespace CDKSTDOTNET.Pages
     public class IndexModel : PageModel
     {
          [BindProperty]
-        public IEnumerable<DispositionSynonym> DispositionSynonymList {get; set;}
+        //public IEnumerable<DispositionSynonym> DispositionSynonymList {get; set;}
 
         private readonly ILogger<IndexModel> _logger;
         private readonly IUnitOfWork _UOW;
@@ -27,9 +27,9 @@ namespace CDKSTDOTNET.Pages
         public async Task OnGetAsync()
         {
             //var repository = _UOW.GetRepository<Disposition>();
-            var repository = _UOW.GetRepositoryAsync<DispositionSynonym>();
+            //var repository = _UOW.GetRepositoryAsync<DispositionSynonym>();
 
-            DispositionSynonymList = await repository.GetListAsync();
+           // DispositionSynonymList = await repository.GetListAsync();
 
         }
     }
