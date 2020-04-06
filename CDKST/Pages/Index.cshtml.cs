@@ -12,7 +12,7 @@ namespace CDKSTDOTNET.Pages
 {
     public class IndexModel : PageModel
     {
-         [BindProperty]
+         //[BindProperty]
         //public IEnumerable<DispositionSynonym> DispositionSynonymList {get; set;}
 
         private readonly ILogger<IndexModel> _logger;
