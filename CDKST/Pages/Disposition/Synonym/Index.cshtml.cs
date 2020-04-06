@@ -1,28 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using MyData.Data.Models.Disposition;
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Threading.Tasks;
+// using Microsoft.AspNetCore.Mvc;
+// using Microsoft.AspNetCore.Mvc.RazorPages;
+// using Microsoft.EntityFrameworkCore;
+// using MyData.Data.Models.Disposition;
+// using Microsoft.Extensions.Logging;
+// using MyRepo;
 
-namespace CDKST.Pages_Disposition_Synonym
-{
-    public class IndexModel : PageModel
-    {
-        private readonly CDKSTContext _context;
+// namespace CDKST.Pages_Disposition_Synonym
+// {
+//     public class IndexModel : PageModel
+//     {
+//          [BindProperty]
+//         public IEnumerable<DispositionSynonym> DispositionSynonymList {get; set;}
 
-        public IndexModel(CDKSTContext context)
-        {
-            _context = context;
-        }
+//         private readonly ILogger<IndexModel> _logger;
+//         private readonly IUnitOfWork _UOW;
 
-        public IList<DispositionSynonym> DispositionSynonym { get;set; }
+//         public IndexModel(ILogger<IndexModel> logger, IUnitOfWork uow)
+//         {
+//             _logger = logger;
+//             _UOW = uow;            
+//         }
 
-        public async Task OnGetAsync()
-        {
-            DispositionSynonym = await _context.DispositionSynonym.ToListAsync();
-        }
-    }
-}
+//         public async Task OnGetAsync()
+//         {
+//             //var repository = _UOW.GetRepository<Disposition>();
+//             var repository = _UOW.GetRepositoryAsync<DispositionSynonym>();
+
+//             DispositionSynonymList = await repository.GetListAsync();
+
+//         }
+//     }
+// }

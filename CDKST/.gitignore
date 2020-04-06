@@ -48,3 +48,4 @@ msbuild.wrn
 .vs/
 app.db
 CDKST.Db
+Identity.Db

@@ -1,44 +1,46 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using MyData.Data.Models.Disposition;
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Threading.Tasks;
+// using Microsoft.AspNetCore.Mvc;
+// using Microsoft.AspNetCore.Mvc.RazorPages;
+// using Microsoft.AspNetCore.Mvc.Rendering;
+// using MyData.Data.Models.Disposition;
+// using Microsoft.Extensions.Logging;
+// using MyRepo;
 
-namespace CDKST.Pages_Disposition_Synonym
-{
-    public class CreateModel : PageModel
-    {
-        private readonly CDKSTContext _context;
 
-        public CreateModel(CDKSTContext context)
-        {
-            _context = context;
-        }
+// namespace CDKST.Pages_Disposition_Synonym
+// {
+//     public class CreateModel : PageModel
+//     {
+       
+//         private readonly IUnitOfWork _UOW;
+//         private readonly ILogger<IndexModel> _logger;
+//         public CreateModel(IUnitOfWork uow, ILogger<IndexModel> logger){
+//             _UOW = uow;
+//             _logger = logger;
+//         }
+//         public IActionResult OnGet()
+//         {
+//             return Page();
+//         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
+//         [BindProperty]
+//         public DispositionSynonym DispositionSynonym { get; set; }
 
-        [BindProperty]
-        public DispositionSynonym DispositionSynonym { get; set; }
+//         // To protect from overposting attacks, enable the specific properties you want to bind to, for
+//         // more details, see https://aka.ms/RazorPagesCRUD.
+//         public async Task<IActionResult> OnPostAsync()
+//         {
+//             if (!ModelState.IsValid)
+//             {
+//                 return Page();
+//             }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.DispositionSynonym.Add(DispositionSynonym);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-        }
-    }
-}
+//             _UOW.GetRepository<DispositionSynonym>().Add(DispositionSynonym);
+            
+//             return RedirectToPage("./Index");
+//         }
+//     }
+// }

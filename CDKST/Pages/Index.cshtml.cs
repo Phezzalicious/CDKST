@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using MyData.Data.Models.Skill;
+using MyData.Data.Models.Disposition;
 using MyRepo;
 
 namespace CDKSTDOTNET.Pages
@@ -13,7 +13,7 @@ namespace CDKSTDOTNET.Pages
     public class IndexModel : PageModel
     {
          [BindProperty]
-        public IEnumerable<SkillLevel> SkillLevelList {get; set;}
+        public IEnumerable<DispositionSynonym> DispositionSynonymList {get; set;}
 
         private readonly ILogger<IndexModel> _logger;
         private readonly IUnitOfWork _UOW;
@@ -27,9 +27,9 @@ namespace CDKSTDOTNET.Pages
         public async Task OnGetAsync()
         {
             //var repository = _UOW.GetRepository<Disposition>();
-            var repository = _UOW.GetRepositoryAsync<SkillLevel>();
+            var repository = _UOW.GetRepositoryAsync<DispositionSynonym>();
 
-            SkillLevelList = await repository.GetListAsync();
+            DispositionSynonymList = await repository.GetListAsync();
 
         }
     }

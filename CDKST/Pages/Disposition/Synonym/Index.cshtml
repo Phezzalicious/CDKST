@@ -1,4 +1,4 @@
-@page
+@* @page
 @model CDKST.Pages_Disposition_Synonym.IndexModel
 
 @{
@@ -14,16 +14,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DispositionSynonym[0].text)
+                @Html.DisplayNameFor(model => model.DispositionSynonymList.text)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DispositionSynonym[0].language)
+                @Html.DisplayNameFor(model => model.DispositionSynonymList.language)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.DispositionSynonym) {
+@foreach (var item in Model.DispositionSynonymList) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.text)
@@ -39,4 +39,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@
