@@ -8,7 +8,7 @@ namespace MyData.Data.Models.Skill
         public string term_identifier {get;set;}
         public int cartesian_index{get;set;}
         public string descriptor {get;set;}
-        public ICollection<SkillVerbSynonym> synonyms{get;set;}
+
        
     }
 }

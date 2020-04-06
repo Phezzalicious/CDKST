@@ -10,20 +10,20 @@
 // using MyRepo;
 
 
-// namespace CDKST.Pages_Disposition_Synonym
+// namespace CDKST.CDKST.Pages.Disposition
 // {
-//     public class DeleteModel : PageModel
+
+//     public class DetailsModel : PageModel
 //     {
-       
-//        private readonly ILogger<IndexModel> _logger;
+//         private readonly ILogger<InModel> _logger;
 //         private readonly IUnitOfWork _UOW;
 
-//         public DeleteModel(ILogger<IndexModel> logger, IUnitOfWork uow)
+//         public DetailsModel(ILogger<IndexModel> logger, IUnitOfWork uow)
 //         {
 //             _logger = logger;
 //             _UOW = uow;            
 //         }
-//         [BindProperty]
+
 //         public DispositionSynonym DispositionSynonym { get; set; }
 
 //         public async Task<IActionResult> OnGetAsync(int? id)
@@ -33,30 +33,13 @@
 //                 return NotFound();
 //             }
 
-        
+//             DispositionSynonym = await _context.DispositionSynonym.FirstOrDefaultAsync(m => m.ID == id);
 
 //             if (DispositionSynonym == null)
 //             {
 //                 return NotFound();
 //             }
 //             return Page();
-//         }
-
-//         public async Task<IActionResult> OnPostAsync(int? id)
-//         {
-//             if (id == null)
-//             {
-//                 return NotFound();
-//             }
-
-//                 _UOW.GetRepository<DispositionSynonym>().Delete(DispositionSynonym);
-
-//             if (DispositionSynonym != null)
-//             {
-                
-//             }
-
-//             return RedirectToPage("./Index");
 //         }
 //     }
 // }

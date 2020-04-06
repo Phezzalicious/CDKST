@@ -11,7 +11,7 @@ namespace MyData.Data.Models.Knowledge
         public int semiotic_index{get;set;}
         public string descriptor{get;set;}
         public string etymology{get;set;}
-        public ICollection<KnowledgeSynonym> synonym{get;set;}
+   
 
 
 

@@ -1,0 +1,51 @@
+@page
+@model CDKST.Pages.Disposition.IndexModel
+
+@{
+    
+    var count = 1;
+}
+ <header class="masthead">
+    <div class="container d-flex h-100 align-items-center">
+      <div class="mx-auto text-center">
+        <h1 class="mx-auto my-0 text-uppercase">Dispositions</h1>
+    </div>
+    </div>
+  </header>
+ <section id="projects" class="projects-section">
+
+<div class="text-center">
+    <table class="table table-hover table-striped text-white">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var disposition in Model.DispositionInstanceList)
+            {
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@disposition.term_identifier</td>
+                    <td>@disposition.cartesian_index</td>
+                    <td>@disposition.descriptor</td>
+                </tr>
+                { count++; }
+            }
+        </tbody>
+    </table>
+</div>
+
+  </section>
+
+
+
+    
+
+
+
+  

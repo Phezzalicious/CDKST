@@ -10,7 +10,7 @@
 // using MyRepo;
 
 
-// namespace CDKST.Pages_Disposition_Synonym
+// namespace CDKST.Pages.CDKST.Disposition
 // {
 //     public class CreateModel : PageModel
 //     {
