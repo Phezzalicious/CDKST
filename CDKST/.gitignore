@@ -49,4 +49,4 @@ msbuild.wrn
 app.db
 CDKST.Db
 Identity.Db
-Migrations
+Migrations/
