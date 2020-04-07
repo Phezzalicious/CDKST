@@ -12,4 +12,6 @@ dotnet ef database update --context CDKSTContext
 dotnet run  
 go to localhost:5000  
 scroll down and click the dispositions button  
-that is seeded data  
+that is seeded data
+
+Sorry about the bad style and such, Work in progress  
