@@ -39,6 +39,9 @@ namespace MyData.Data
         {
            base.OnModelCreating(Seeding.SeedDispositionInstance(modelBuilder));
            base.OnModelCreating(Seeding.SeedSkillLevel(modelBuilder));
+           base.OnModelCreating(Seeding.SeedKnowledgeElement(modelBuilder));
+           // base.OnModelCreating(Seeding.SeedAtomic(modelBuilder));
+           // base.OnModelCreating(Seeding.SeedComposites(modelBuilder));
         }
 
 

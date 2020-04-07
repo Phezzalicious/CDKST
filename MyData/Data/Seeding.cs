@@ -14,226 +14,120 @@ namespace MyData.Data
     {
         public static ModelBuilder SeedSkillLevel(ModelBuilder modelBuilder)
         {
-            /*
-                {
-    "model": "skill.skillverbsynonym",
-    "pk": "a57b905f-1a12-4699-a233-77c7238a2389",
-    "fields": {
-        "text": "Solid!",
-        "language": "English"
-    }
-},
-{
-    "model": "skill.skillverbsynonym",
-    "pk": "78113dc0-3a88-4297-9e2c-c6a9c9116836",
-    "fields": {
-        "text": "Gas",
-        "language": "English"
-    }
-},
-{
-    "model": "skill.skilllevel",
-    "pk": "8e6a3bbb-1bd9-49c2-8062-35f827e59ca3",
-    "fields": {
-        "term_identifier": "Rembering",
-        "cartesian_index": 1,
-        "descriptor": "Exhibit memory of previously learned materials by recalling facts, terms, basic concepts, and answers.",
-        "synonyms": [
-            "a57b905f-1a12-4699-a233-77c7238a2389"
-        ]
-    }
-},
-{
-    "model": "skill.skilllevel",
-    "pk": "68969544-771d-4e03-ae20-eec24318784e",
-    "fields": {
-        "term_identifier": "Understanding",
-        "cartesian_index": 2,
-        "descriptor": "Demonstrate understanding of facts and ideas by organizing, comparing, translating, interpreting, giving descriptions, and stating main ideas.",
-        "synonyms": [
-            "78113dc0-3a88-4297-9e2c-c6a9c9116836"
-        ]
-    }
-},
-{
-    "model": "skill.skilllevel",
-    "pk": "7b4fbe83-3c5e-48a4-957e-1846fa16a74f",
-    "fields": {
-        "term_identifier": "Applying",
-        "cartesian_index": 3,
-        "descriptor": "Solve problems to new situations by applying acquired knowledge, facts, techniques and rules in a different way.",
-        "synonyms": [
-            "78113dc0-3a88-4297-9e2c-c6a9c9116836"
-        ]
-    }
-},
-{
-    "model": "skill.skilllevel",
-    "pk": "b372a418-cae7-48c3-bae7-f903bad06d27",
-    "fields": {
-        "term_identifier": "Analyzing",
-        "cartesian_index": 4,
-        "descriptor": "Examine and break information into parts by identifying motives or causes. Make inferences and find evidence to support generalizations.",
-        "synonyms": [
-            "78113dc0-3a88-4297-9e2c-c6a9c9116836"
-        ]
-    }
-},
-{
-    "model": "skill.skilllevel",
-    "pk": "b3aab73b-4060-4260-9343-9abbe4c13b18",
-    "fields": {
-        "term_identifier": "Evaluating",
-        "cartesian_index": 5,
-        "descriptor": "Present and defend opinions by making judgments about information, validity of ideas, or quality of work based on a set of criteria.",
-        "synonyms": [
-            "78113dc0-3a88-4297-9e2c-c6a9c9116836"
-        ]
-    }
-},
-{
-    "model": "skill.skilllevel",
-    "pk": "cee45b12-4082-4600-bae6-46ed5a6efb66",
-    "fields": {
-        "term_identifier": "Creating",
-        "cartesian_index": 6,
-        "descriptor": "Compile information together in a different way by combining elements in a new pattern or proposing alternative solutions.",
-        "synonyms": [
-            "78113dc0-3a88-4297-9e2c-c6a9c9116836"
-        ]
-    }
-},*/
             return modelBuilder.Entity<SkillLevel>(entity =>
             {
-                  entity.HasData(
-                    new SkillLevel   
-                    {
-                        ID = 1,
+                entity.HasData(
+                  new SkillLevel
+                  {
+                      ID = 1,
+                      term_identifier = "Rembering",
+                      cartesian_index = 1,
+                      descriptor = "Exhibit memory of previously learned materials by recalling facts, terms, basic concepts, and answers."
 
-                        term_identifier = "Proactive",
-                        cartesian_index = 1,
-                        descriptor = "With Initiative (Nwokeji, Stachel, & Holmes, 2019) / Self-Starter (Clear, 2017) Shows independence. Ability to assess and start activities independently without needing to be told what to do. Willing to take the lead, not waiting for others to start activities or wait for instructions."
-                    }
-                    );
+                  },
+                  new SkillLevel
+                  {
+                      ID = 2,
+                      term_identifier = "Understanding",
+                      cartesian_index = 2,
+                      descriptor = "Demonstrate understanding of facts and ideas by organizing, comparing, translating, interpreting, giving descriptions, and stating main ideas."
+
+                  },
+                     new SkillLevel
+                     {
+                         ID = 3,
+                         term_identifier = "Applying",
+                         cartesian_index = 3,
+                         descriptor = "Solve problems to new situations by applying acquired knowledge, facts, techniques and rules in a different way."
+
+                     },
+                     new SkillLevel
+                     {
+                         ID = 4,
+                         term_identifier = "Analyzing",
+                         cartesian_index = 4,
+                         descriptor = "Examine and break information into parts by identifying motives or causes. Make inferences and find evidence to support generalizations."
+
+                     },
+                     new SkillLevel
+                     {
+                         ID = 5,
+                         term_identifier = "Evaluating",
+                         cartesian_index = 5,
+                         descriptor = "Present and defend opinions by making judgments about information, validity of ideas, or quality of work based on a set of criteria."
+                     },
+                     new SkillLevel
+                     {
+                         ID = 6,
+                         term_identifier = "Creating",
+                         cartesian_index = 6,
+                         descriptor = "Compile information together in a different way by combining elements in a new pattern or proposing alternative solutions."
+                     }
+
+
+                  );
 
             });
         }
 
 
 
-public static ModelBuilder SeedKnowledgeElement(ModelBuilder modelBuilder)
+        public static ModelBuilder SeedKnowledgeElement(ModelBuilder modelBuilder)
         {
-            /*
+            return modelBuilder.Entity<KnowledgeElement>(entity =>
             {
-    "model": "knowledge.knowledgesynonym",
-    "pk": "20f7a9e3-f9a7-4111-96e5-cc87cb851f92",
-    "fields": {
-        "text": "Clouds",
-        "language": "English"
-    }
-},
-{
-    "model": "knowledge.knowledgesynonym",
-    "pk": "f96a0eaf-3d1c-4d0a-b9fa-a8c002cfcbb2",
-    "fields": {
-        "text": "Temperature",
-        "language": "English"
-    }
-},
-{
-    "model": "knowledge.knowledgeelement",
-    "pk": "e7ed495c-1502-4966-92f8-ad344451f260",
-    "fields": {
-        "term_identifier": "Life",
-        "cartesian_index": 6,
-        "semiotic_index": 8,
-        "descriptor": "Can this planet support life?",
-        "etymology": "test",
-        "synonyms": [
-            "20f7a9e3-f9a7-4111-96e5-cc87cb851f92"
-        ],
-        "skills":"68969544-771d-4e03-ae20-eec24318784e"
-    }
-},
-{
-    "model": "knowledge.knowledgeelement",
-    "pk": "33f7c0e2-4271-4e6f-b042-aee4790394dc",
-    "fields": {
-        "term_identifier": "Rocks",
-        "cartesian_index": 5,
-        "semiotic_index": 5,
-        "descriptor": "Rocky planet?",
-        "etymology": "kn o",
-        "synonyms": [
-            "f96a0eaf-3d1c-4d0a-b9fa-a8c002cfcbb2"
-        ],
-        "skills": "b3aab73b-4060-4260-9343-9abbe4c13b18"
-        
-    }
-},
-{
-    "model": "knowledge.knowledgeelement",
-    "pk": "e7ed495c-1502-4966-92f8-ad344451f260",
-    "fields": {
-        "term_identifier": "Life",
-        "cartesian_index": 6,
-        "semiotic_index": 8,
-        "descriptor": "Can this planet support life?",
-        "etymology": "test",
-        "synonyms": [
-            "20f7a9e3-f9a7-4111-96e5-cc87cb851f92"
-        ],
-        "skills":"68969544-771d-4e03-ae20-eec24318784e"
-    }
-},
-{
-    "model": "knowledge.knowledgeelement",
-    "pk": "5b2ebca6-4ffb-49fb-8985-eb73567d233f",
-    "fields": {
-        "term_identifier": "Pepsi",
-        "cartesian_index": 4,
-        "semiotic_index": 4,
-        "descriptor": "Cool Refreshing Taste",
-        "etymology": "Better than Coke",
-        "synonyms": [
-            "f96a0eaf-3d1c-4d0a-b9fa-a8c002cfcbb2"
-        ],
-        "skills": "b3aab73b-4060-4260-9343-9abbe4c13b18"
-        
-    }
-},
-{
-    "model": "knowledge.knowledgeelement",
-    "pk": "5db91aa2-f658-41c0-9ea2-ff851d767c61",
-    "fields": {
-        "term_identifier": "Mtn Dew",
-        "cartesian_index": 3,
-        "semiotic_index": 3,
-        "descriptor": "Do the Dew",
-        "etymology": "Citrus",
-        "synonyms": [
-            "f96a0eaf-3d1c-4d0a-b9fa-a8c002cfcbb2"
-        ],
-        "skills": "b3aab73b-4060-4260-9343-9abbe4c13b18"
-        
-    }
-},
-{
-            
-            */
+                entity.HasData(
+                  new KnowledgeElement
+                  {
+                      ID = 1,
+                      term_identifier = "Coke",
+                      cartesian_index = 1,
+                      semiotic_index = 1,
+                      descriptor = "Coca-Cola Revives and Sustains",
+                      etymology = "Polar Bears"
 
-            return modelBuilder.Entity<SkillLevel>(entity =>
-            {
-                  entity.HasData(
-                    new SkillLevel   
-                    {
-                        ID = 1,
+                  },
+                       new KnowledgeElement
+                       {
+                           ID = 2,
+                           term_identifier = "Pepsi",
+                           cartesian_index = 2,
+                           semiotic_index = 2,
+                           descriptor = "That's What I Like' – Variety",
+                           etymology = "Marketing where Coke Doesnt"
 
-                        term_identifier = "Proactive",
-                        cartesian_index = 1,
-                        descriptor = "With Initiative (Nwokeji, Stachel, & Holmes, 2019) / Self-Starter (Clear, 2017) Shows independence. Ability to assess and start activities independently without needing to be told what to do. Willing to take the lead, not waiting for others to start activities or wait for instructions."
-                    }
-                    );
+                       },
+                       new KnowledgeElement
+                       {
+                           ID = 3,
+                           term_identifier = "Mountain Dew",
+                           cartesian_index = 3,
+                           semiotic_index = 3,
+                           descriptor = "Do the Dew",
+                           etymology = "Spy vs Spy"
+
+                       },
+                       new KnowledgeElement
+                       {
+                           ID = 4,
+                           term_identifier = "Bawls",
+                           cartesian_index = 4,
+                           semiotic_index = 4,
+                           descriptor = "The Best Soda you Havent Heard OF",
+                           etymology = "Guarana"
+
+                       },
+                       new KnowledgeElement
+                       {
+                           ID = 5,
+                           term_identifier = "RC Cola",
+                           cartesian_index = 5,
+                           semiotic_index = 5,
+                           descriptor = "I wish this was a coke!",
+                           etymology = "It was just a mirage!"
+
+                       }
+                  );
 
             });
         }
@@ -330,81 +224,42 @@ public static ModelBuilder SeedKnowledgeElement(ModelBuilder modelBuilder)
 
     }
 }
+// public static ModelBuilder SeedAtomic(ModelBuilder modelBuilder)
+// {        
+//     return modelBuilder.Entity<Atomic>(entity =>
+//     {
+//         entity.HasData(
+//             new Atomic
+//             {
+//                 /*
+//                 public int ID{get;set;}
+//                 public string term_identifier{get;set;}
+//                 public string prose_task_statement{get;set;}
+//                 public ICollection<DispositionInstance> Dispositions{get;set;}
+//                 public Dictionary<KnowledgeElement,SkillLevel> kspairs { get; set;} 
+//                 */
+//             }
+//         );
+//     });
+// }
+//  public static ModelBuilder SeedComposite(ModelBuilder modelBuilder)
+// {        
+//     return modelBuilder.Entity<Composite>(entity =>
+//     {
+//         entity.HasData(
+//             new Composite
+//             {
+//                 /*
+//                 public int ID{get;set;}
+//                 public string term_identifier{get;set;}
+//                 public string prose_task_statement{get;set;}
+//                 public ICollection<DispositionInstance> Dispositions{get;set;}
+//                 public ICollection<Atomic> atomics{get;set;}
+//                 public ICollection<Composite> composites{get;set;}
+//                 */
 
+//             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-[
-
-
-
-
-    "model": "competencies.atomiccompetency",
-    "pk": "a893592b-7fc0-489f-9904-cd642ec91ae8",
-    "fields": {
-        "term_identifier": "First One",
-        "prose_task_statement": "This is the first Competency",
-        "disposition": [ "e8a7bc3c-92f1-4330-9a4e-c91d51c3aeed","4afa6240-7d61-4e62-9581-2f1467f363ae","da52bdaf-e8aa-4377-8f18-57c04fd96569", "b33e20e9-f807-4668-86aa-5dda9a773d2b"],
-        "KnowledgeElement": ["5db91aa2-f658-41c0-9ea2-ff851d767c61","e7ed495c-1502-4966-92f8-ad344451f260"]
-    }
-
-},
-{
-    "model": "competencies.atomiccompetency",
-    "pk": "f4eaebca-a1f9-49ef-ba28-34896afe7cf8",
-    "fields": {
-        "term_identifier": "Second One",
-        "prose_task_statement": "This is the Second Competency",
-        "disposition":[ "b33e20e9-f807-4668-86aa-5dda9a773d2b", "e8a7bc3c-92f1-4330-9a4e-c91d51c3aeed"],
-        "KnowledgeElement": ["33f7c0e2-4271-4e6f-b042-aee4790394dc","5db91aa2-f658-41c0-9ea2-ff851d767c61","5b2ebca6-4ffb-49fb-8985-eb73567d233f"]
-    }
-},
-{
-    "model": "competencies.atomiccompetency",
-    "pk": "42ec6b41-4537-4aa6-99f7-cc9e5bfc844f",
-    "fields": {
-        "term_identifier": "Third One",
-        "prose_task_statement": "This is the Third Competency",
-        "disposition": ["b33e20e9-f807-4668-86aa-5dda9a773d2b","4afa6240-7d61-4e62-9581-2f1467f363ae","e8a7bc3c-92f1-4330-9a4e-c91d51c3aeed"],
-        "KnowledgeElement": ["5db91aa2-f658-41c0-9ea2-ff851d767c61","e7ed495c-1502-4966-92f8-ad344451f260"]
-    }
-
-},
-{
-    "model": "competencies.atomiccompetency",
-    "pk": "3cab50ae-b98a-4495-a3e7-6feb2bc6e531",
-    "fields": {
-        "term_identifier": "Fourth One",
-        "prose_task_statement": "This is the Fourth Competency",
-        "disposition": ["cbf268f4-5664-4947-a8ad-1087fbacf52e","4afa6240-7d61-4e62-9581-2f1467f363ae", "63a8c743-29ba-4809-8839-1003e83a8033"],
-        "KnowledgeElement": ["33f7c0e2-4271-4e6f-b042-aee4790394dc","5db91aa2-f658-41c0-9ea2-ff851d767c61","5b2ebca6-4ffb-49fb-8985-eb73567d233f"]
-    }
-
-},
-{
-    "model": "competencies.atomiccompetency",
-    "pk": "91a46d9b-c824-4cb2-96b0-e70763573299",
-    "fields": {
-        "term_identifier": "Fifth One",
-        "prose_task_statement": "This is the Fifth Competency",
-        "disposition": ["63a8c743-29ba-4809-8839-1003e83a8033","cbf268f4-5664-4947-a8ad-1087fbacf52e"],
-        "KnowledgeElement": ["5db91aa2-f658-41c0-9ea2-ff851d767c61","e7ed495c-1502-4966-92f8-ad344451f260","33f7c0e2-4271-4e6f-b042-aee4790394dc"]
-    }
-
-}
-]
-
-
-
-*/
+//         );
+//     });
+// }
