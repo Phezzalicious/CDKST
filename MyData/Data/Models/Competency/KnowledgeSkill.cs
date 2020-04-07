@@ -5,16 +5,14 @@ using MyData.Data.Models.Skill;
 
 namespace MyData.Data.Models.Competency
 {
-    public class Atomic:Competency
+    public class KnowledgeSkill
     {
-    
-       public ICollection<KnowledgeSkill> kspairs{get;set;}
+    public int ID{get;set;}
+     public KnowledgeElement knowledgeElement{get;set;}
+     public SkillLevel skillLevel{get;set;}
+
 
 
 
     }
 }
-
-
-
-

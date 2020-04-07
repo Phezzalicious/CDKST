@@ -2,7 +2,7 @@
 
 Make a new folder somewhere   
 git init  
-git add remote phelpsIsCool https://github.com/Phezzalicious/CDKSTExample.git  
+git remote add phelpsIsCool https://github.com/Phezzalicious/CDKSTExample.git  
 git pull phelpsIsCool master  
 cd MyData  
 dotnet ef migrations add InitialCreate --startup-project ../CDKST/CDKST.csproj --context CDKSTContext  

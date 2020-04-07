@@ -84,7 +84,7 @@ namespace MyData.Data
                       cartesian_index = 1,
                       semiotic_index = 1,
                       descriptor = "Coca-Cola Revives and Sustains",
-                      etymology = "Polar Bears"
+                      etymology = "Ursus maritimus"
 
                   },
                        new KnowledgeElement
