@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MyData.Data.Models.Disposition;
+using MyData.Data.Models.Skill;
 using Microsoft.Extensions.Logging;
 using MyRepo;
 
@@ -14,7 +14,7 @@ namespace CDKST.Pages.Skill
     public class IndexModel : PageModel
     {
          [BindProperty]
-        public IEnumerable<DispositionInstance> DispositionInstanceList {get; set;}
+        public IEnumerable<SkillLevel> SkillLevelList {get; set;}
 
         private readonly ILogger<IndexModel> _logger;
         private readonly IUnitOfWork _UOW;
@@ -28,9 +28,9 @@ namespace CDKST.Pages.Skill
         public async Task OnGetAsync()
         {
             //var repository = _UOW.GetRepository<DispositionInstance>();
-            var repository = _UOW.GetRepositoryAsync<DispositionInstance>();
+            var repository = _UOW.GetRepositoryAsync<SkillLevel>();
 
-           DispositionInstanceList = await repository.GetListAsync();
+           SkillLevelList = await repository.GetListAsync();
 
         }
     }

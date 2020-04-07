@@ -8,7 +8,8 @@
  <header class="masthead">
     <div class="container d-flex h-100 align-items-center">
       <div class="mx-auto text-center">
-        <h1 class="mx-auto my-0 text-uppercase">Dispositions</h1>
+        <h1 class="mx-auto my-0 text-uppercase">Skill Levels </h1>
+        <h2 class ="mx-auto my-0 text-center">Bloom</h2>
     </div>
     </div>
   </header>
@@ -20,19 +21,20 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                 <th scope="col">Category</th>
                 <th scope="col">Description</th>
-                <th scope="col">Category</th>
+               
             </tr>
         </thead>
 
         <tbody>
-            @foreach (var disposition in Model.DispositionInstanceList)
+            @foreach (var skill in Model.SkillLevelList)
             {
                 <tr>
                     <th scope="row">@count</th>
-                    <td>@disposition.term_identifier</td>
-                    <td>@disposition.cartesian_index</td>
-                    <td>@disposition.descriptor</td>
+                    <td>@skill.term_identifier</td>
+                    <td>@skill.cartesian_index</td>
+                    <td>@skill.descriptor</td>
                 </tr>
                 { count++; }
             }
