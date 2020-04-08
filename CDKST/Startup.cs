@@ -17,6 +17,8 @@ using CDKST.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using MyData.Data;
 using MyRepo.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 namespace CDKST
 {
     public class Startup
@@ -44,16 +46,19 @@ namespace CDKST
             options.UseSqlite(Configuration.GetConnectionString("CDKSTContext")))
                 .AddUnitOfWork<CDKSTContext>();
             }
-            else
+            if(Environment.IsProduction())
             {
-                services.AddDbContext<IdentityContext>(options =>
-options.UseSqlServer(Configuration.GetConnectionString("IdentityContextSQLServer")));
+                 services.AddDbContext<IdentityContext>(
+                    options => options.UseMySql(Configuration.GetConnectionString("IdentityContextSQLServer"),
+                                                mySqlOptions => mySqlOptions.ServerVersion(new Version(5, 7, 29), ServerType.MySql)
+                    )).AddUnitOfWork<IdentityContext>();
 
-                services.AddDbContext<CDKSTContext>(options =>
-           options.UseSqlServer(Configuration.GetConnectionString("CDKSTContextSQLServer")))
-               .AddUnitOfWork<CDKSTContext>();
+                 services.AddDbContext<CDKSTContext>(
+                    options => options.UseMySql(Configuration.GetConnectionString("CDKSTContextSQLServer"),
+                                                mySqlOptions => mySqlOptions.ServerVersion(new Version(5, 7, 29), ServerType.MySql)
+                    )).AddUnitOfWork<CDKSTContext>();
             }
-
+ 
             //https://phezzalicious@bitbucket.org/phezzalicious/cdkst-dotnet.git 
 
         }

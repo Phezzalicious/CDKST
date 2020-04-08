@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MyData.Data.Models.Skill;
 using MyData.Data.Models.Knowledge;
 using MyData.Data.Models.Disposition;
-using MyData.Data.Models.Competency;
-using MyData.Data.Models.Task;
+
 namespace MyData.Data
 {
     public class Seeding
@@ -69,9 +64,6 @@ namespace MyData.Data
 
             });
         }
-
-
-
         public static ModelBuilder SeedKnowledgeElement(ModelBuilder modelBuilder)
         {
             return modelBuilder.Entity<KnowledgeElement>(entity =>
