@@ -45,9 +45,11 @@ namespace CDKST
                 services.AddDbContext<CDKSTContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("CDKSTContext")))
                 .AddUnitOfWork<CDKSTContext>();
+                Console.WriteLine("IsDevelopment()");
             }
             if(Environment.IsProduction())
             {
+                Console.WriteLine("IsProduction()");
                  services.AddDbContext<IdentityContext>(
                     options => options.UseMySql(Configuration.GetConnectionString("IdentityContextSQLServer"),
                                                 mySqlOptions => mySqlOptions.ServerVersion(new Version(5, 7, 29), ServerType.MySql)
