@@ -37,31 +37,20 @@ namespace CDKST
         {
 
             services.AddRazorPages();
-            if (Environment.IsDevelopment())
-            {
-                Console.WriteLine("IsDevelopment()");
-                services.AddDbContext<IdentityContext>(options =>
-                    options.UseSqlite(Configuration.GetConnectionString("IdentityContext")))
-                        .AddUnitOfWork<CDKSTContext>();;
-                services.AddDbContext<CDKSTContext>(options =>
-                    options.UseSqlite(Configuration.GetConnectionString("CDKSTContext")))
-                        .AddUnitOfWork<CDKSTContext>();
-                
-            }
-            if(Environment.IsProduction())
-            {
-                Console.WriteLine("IsProduction()");
-                 services.AddDbContext<IdentityContext>(options => 
-                    options.UseMySql(Configuration.GetConnectionString("IdentityContextSQLServer"),mySqlOptions => 
-                        mySqlOptions.ServerVersion(new Version(5, 7, 29), ServerType.MySql)))
-                            .AddUnitOfWork<IdentityContext>();
 
-                 services.AddDbContext<CDKSTContext>(options => 
-                    options.UseMySql(Configuration.GetConnectionString("CDKSTContextSQLServer"),mySqlOptions =>
-                        mySqlOptions.ServerVersion(new Version(5, 7, 29), ServerType.MySql)))
-                            .AddUnitOfWork<CDKSTContext>();
-            }
- 
+
+        
+            services.AddDbContext<IdentityContext>(options =>
+               options.UseMySql(Configuration.GetConnectionString("IdentityContextSQLServer"), mySqlOptions =>
+                    mySqlOptions.ServerVersion(new Version(5, 7, 29), ServerType.MySql)))
+                       .AddUnitOfWork<IdentityContext>();
+
+            services.AddDbContext<CDKSTContext>(options =>
+               options.UseMySql(Configuration.GetConnectionString("CDKSTContextSQLServer"), mySqlOptions =>
+                    mySqlOptions.ServerVersion(new Version(5, 7, 29), ServerType.MySql)))
+                       .AddUnitOfWork<CDKSTContext>();
+
+
             //https://phezzalicious@bitbucket.org/phezzalicious/cdkst-dotnet.git 
 
         }

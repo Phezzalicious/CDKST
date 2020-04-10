@@ -24,7 +24,7 @@ namespace MyRepo
         Task AddAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default(CancellationToken));
 
         // Task Delete(T entity, CancellationToken cancellationToken = default(CancellationToken));
-        // Task DeleteAsync(object id);
+         //Task DeleteAsync(object id);
         // Task Delete(params T[] entities);
         // Task Delete(IEnumerable<T> entities, CancellationToken cancellationToken = default(CancellationToken));
         

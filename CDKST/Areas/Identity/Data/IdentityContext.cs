@@ -15,7 +15,7 @@ namespace CDKST.Areas.Identity.Data
             : base(options)
         {
         }
-
+    public DbSet<Member> Members{get;set;}
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

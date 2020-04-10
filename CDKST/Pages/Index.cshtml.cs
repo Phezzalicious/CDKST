@@ -12,25 +12,25 @@ namespace CDKST.Pages
 {
     public class IndexModel : PageModel
     {
-        //  [BindProperty]
-        // public IEnumerable<DispositionInstance> DispositionInstanceList {get; set;}
 
-        // private readonly ILogger<IndexModel> _logger;
-        // private readonly IUnitOfWork _UOW;
 
-        // public IndexModel(ILogger<IndexModel> logger, IUnitOfWork uow)
-        // {
-        //     _logger = logger;
-        //     _UOW = uow;            
-        // }
+    //      [BindProperty]
+     
 
-        // public async Task OnGetAsync()
-        // {
-        //     //var repository = _UOW.GetRepository<DispositionInstance>();
-        //     var repository = _UOW.GetRepositoryAsync<DispositionInstance>();
+    //     private readonly ILogger<IndexModel> _logger;
+      
 
-        //    DispositionInstanceList = await repository.GetListAsync();
+    //     public IndexModel(ILogger<IndexModel> logger, IUnitOfWork uow)
+    //     {
+    //         _logger = logger;
+                
+    //     }
 
-        // }
-    }
+    //     public async Task OnGetAsync()
+    //     {
+    //         //var repository = _UOW.GetRepository<DispositionInstance>();
+
+
+    //     }
+     }
 }

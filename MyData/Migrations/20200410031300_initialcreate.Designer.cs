@@ -9,81 +9,66 @@ using MyData.Data;
 namespace MyData.Migrations
 {
     [DbContext(typeof(CDKSTContext))]
-    [Migration("20200408174526_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200410031300_initialcreate")]
+    partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3");
+                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("MyData.Data.Models.Competency.Atomic", b =>
+            modelBuilder.Entity("MyData.Data.Models.Competency.Competency", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("CompositeID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("prose_task_statement")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("term_identifier")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("ID");
 
                     b.HasIndex("CompositeID");
 
-                    b.ToTable("Atomic");
-                });
+                    b.ToTable("Competency");
 
-            modelBuilder.Entity("MyData.Data.Models.Competency.Composite", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CompositeID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("prose_task_statement")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("term_identifier")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CompositeID");
-
-                    b.ToTable("Composite");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Competency");
                 });
 
             modelBuilder.Entity("MyData.Data.Models.Competency.KnowledgeSkill", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int?>("AtomicID")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<int?>("knowledgeElementID")
-                        .HasColumnType("INTEGER");
+                    b.Property<int?>("knowledgeID")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("skillLevelID")
-                        .HasColumnType("INTEGER");
+                    b.Property<int?>("skillID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.HasIndex("AtomicID");
 
-                    b.HasIndex("knowledgeElementID");
+                    b.HasIndex("knowledgeID");
 
-                    b.HasIndex("skillLevelID");
+                    b.HasIndex("skillID");
 
                     b.ToTable("KnowledgeSkill");
                 });
@@ -92,28 +77,23 @@ namespace MyData.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<int?>("AtomicID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CompositeID")
-                        .HasColumnType("INTEGER");
+                    b.Property<int?>("CompetencyID")
+                        .HasColumnType("int");
 
                     b.Property<int>("cartesian_index")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("descriptor")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("term_identifier")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AtomicID");
-
-                    b.HasIndex("CompositeID");
+                    b.HasIndex("CompetencyID");
 
                     b.ToTable("DispositionInstance");
 
@@ -194,22 +174,22 @@ namespace MyData.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("cartesian_index")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("descriptor")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("etymology")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("semiotic_index")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("term_identifier")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("ID");
 
@@ -267,16 +247,16 @@ namespace MyData.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("cartesian_index")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("descriptor")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("term_identifier")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("ID");
 
@@ -331,7 +311,7 @@ namespace MyData.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -340,15 +320,22 @@ namespace MyData.Migrations
 
             modelBuilder.Entity("MyData.Data.Models.Competency.Atomic", b =>
                 {
-                    b.HasOne("MyData.Data.Models.Competency.Composite", null)
-                        .WithMany("atomics")
-                        .HasForeignKey("CompositeID");
+                    b.HasBaseType("MyData.Data.Models.Competency.Competency");
+
+                    b.HasDiscriminator().HasValue("Atomic");
                 });
 
             modelBuilder.Entity("MyData.Data.Models.Competency.Composite", b =>
                 {
+                    b.HasBaseType("MyData.Data.Models.Competency.Competency");
+
+                    b.HasDiscriminator().HasValue("Composite");
+                });
+
+            modelBuilder.Entity("MyData.Data.Models.Competency.Competency", b =>
+                {
                     b.HasOne("MyData.Data.Models.Competency.Composite", null)
-                        .WithMany("composites")
+                        .WithMany("competencies")
                         .HasForeignKey("CompositeID");
                 });
 
@@ -358,24 +345,20 @@ namespace MyData.Migrations
                         .WithMany("kspairs")
                         .HasForeignKey("AtomicID");
 
-                    b.HasOne("MyData.Data.Models.Knowledge.KnowledgeElement", "knowledgeElement")
+                    b.HasOne("MyData.Data.Models.Knowledge.KnowledgeElement", "knowledge")
                         .WithMany()
-                        .HasForeignKey("knowledgeElementID");
+                        .HasForeignKey("knowledgeID");
 
-                    b.HasOne("MyData.Data.Models.Skill.SkillLevel", "skillLevel")
+                    b.HasOne("MyData.Data.Models.Skill.SkillLevel", "skill")
                         .WithMany()
-                        .HasForeignKey("skillLevelID");
+                        .HasForeignKey("skillID");
                 });
 
             modelBuilder.Entity("MyData.Data.Models.Disposition.DispositionInstance", b =>
                 {
-                    b.HasOne("MyData.Data.Models.Competency.Atomic", null)
+                    b.HasOne("MyData.Data.Models.Competency.Competency", null)
                         .WithMany("Dispositions")
-                        .HasForeignKey("AtomicID");
-
-                    b.HasOne("MyData.Data.Models.Competency.Composite", null)
-                        .WithMany("Dispositions")
-                        .HasForeignKey("CompositeID");
+                        .HasForeignKey("CompetencyID");
                 });
 #pragma warning restore 612, 618
         }
