@@ -1,0 +1,53 @@
+﻿@page
+@model CDKST.Pages.KnowledgeElements.IndexModel
+@{
+    ViewData["Title"] = "Knowledge Elements";
+    var count = 1;
+}
+ <header class="knowledgehead">
+    <div class="container d-flex h-100 align-items-center">
+      <div class="mx-auto text-center">
+        <h1 class="mx-auto my-0 text-uppercase">Knowledge Elements</h1>
+    </div>
+    </div>
+  </header>
+<section id="knowledge" class="knowledge-section">
+    <div class="text-center">
+        <table class="table text-light">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Cartesian Index</th>
+                    <th scope="col">Semiotic Index</th>
+                    <th scope="col">Etymology</th>                
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ke in Model.KnowledgeElementsList)
+                {
+                    <tr>
+                        <th scope="row">@ke.Id</th>
+                        <td>@ke.Name</td>
+                        <td>@ke.Description</td>
+                        <td>@ke.CartesianIndex</td>
+                        <td>@ke.SemioticIndex</td>                    
+                        <td>@ke.Etymology</td>
+                    </tr>
+                    { count++; }
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+
+    
+
+
+
+  
+
+

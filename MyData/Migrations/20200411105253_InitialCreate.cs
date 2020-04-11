@@ -77,7 +77,8 @@ namespace MyData.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     MemberCompetencyId = table.Column<int>(nullable: true),
-                    CompetencyId = table.Column<int>(nullable: false)
+                    CompetencyId = table.Column<int>(nullable: false),
+                    CompositeCompetencyId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -88,6 +89,12 @@ namespace MyData.Migrations
                         principalTable: "Competencies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ConstituentCompetencies_Competencies_CompositeCompetencyId",
+                        column: x => x.CompositeCompetencyId,
+                        principalTable: "Competencies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ConstituentCompetencies_Competencies_MemberCompetencyId",
                         column: x => x.MemberCompetencyId,
@@ -169,6 +176,11 @@ namespace MyData.Migrations
                 name: "IX_ConstituentCompetencies_CompetencyId",
                 table: "ConstituentCompetencies",
                 column: "CompetencyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ConstituentCompetencies_CompositeCompetencyId",
+                table: "ConstituentCompetencies",
+                column: "CompositeCompetencyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConstituentCompetencies_MemberCompetencyId",

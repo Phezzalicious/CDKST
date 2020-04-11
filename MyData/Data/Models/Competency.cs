@@ -21,6 +21,6 @@ namespace MyData.Data.Models
     }
     public class CompositeCompetency : Competency
     {
-        ICollection<ConstituentCompetency> ConstituentCompetencies {get; set;}
+        public ICollection<ConstituentCompetency> ConstituentCompetencies {get; set;}
     }
 }

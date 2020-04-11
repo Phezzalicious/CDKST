@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,7 @@ namespace MyData.Data
                 List<KnowledgeElement> knowledgeElements = null;
                 List<SkillLevel> skillLevels = null;
                 List<Disposition> dispositions = null;
+          
 
                 /* KNOWLEDGE ELEMENTS SEED */
 
@@ -210,7 +212,68 @@ namespace MyData.Data
                                             "to sustain efforts to continue tasks. Direction " +
                                             "from others is not required to continue a task " +
                                             "toward its desired ends."
-                        }
+                        }, 
+                        new Disposition
+                        {
+                            Id = 4,
+                            Name = "Passionate",
+                            Category = "Qualities",
+                            Discipline = "Information Systems",
+                            Description = "With Passion (Nwokeji et al., 2019), (Clear, 2017) / Conviction (Gray, 2015) Strongly committed to and enthusiastic about the realization of the task or goal. Makes the compelling case for the success and benefits of task, project, team or means of achieving goals."
+
+                        },
+                          
+                           new Disposition
+                           {
+                               Id = 5,
+                               Name = "Professional",
+                               Category = "Qualities",
+                               Discipline = "Information Systems",
+                               Description = "With Professionalism / Work ethic (Nwokeji et al., 2019) Reflecting qualities connected with trained and skilled people: Acting honestly, with integrity, commitment, determination and dedication to what is required to achieve a task."
+                           },
+                           new Disposition
+                           {
+                               Id = 6,
+                               Name = "Responsible",
+                               Category = "Qualities",
+                               Discipline = "Information Systems",
+                               Description = "With Judgement / Discretion (Nwokeji et al., 2019) / Responsible (Clear, 2017) / Rectitude (Grey, 2015) Reflect on conditions and concerns, then acting according to what is appropriate to the situation. Making responsible assessments and taking actions using professional knowledge, experience, understanding and common sense. E.g., Responsibility, Professional astuteness (Grey, 2015)."
+
+                           },
+                           new Disposition
+                           {
+                               Id = 7,
+                               Name = "Adaptable",
+                               Category = "Qualities",
+                               Discipline = "Information Systems",
+                               Description = "Adaptable (Nwokeji et al., 2019) / Flexible (Clear, 2017) / Agile (Weber, 2017) Ability or willingness to adjust approach in response to changing conditions or needs."
+
+                           },
+                           new Disposition
+                           {
+                               Id = 8,
+                               Name = "Collaborative",
+                               Category = "Qualities",
+                               Discipline = "Information Systems",
+                               Description = "Collaborative (Weber, 2017) / Team Player (Clear, 2017) / Influencing (Nwokeji et al., 2019) Willingness to work with others; engaging appropriate involvement of other persons and organizations helpful to the task. Striving to be respectful and productive in achieving a common goal."
+                           },
+                           new Disposition
+                           {
+                               Id = 9,
+                               Name = "Responsive",
+                               Category = "Habits",
+                               Discipline = "Information Systems",
+                               Description = "Responsive (Weber, 2017) / Respectful (Clear, 2017) Reacting quickly and positively. Respecting the timing needs for communication and actions needed to achieve the goals of the work."
+
+                           },
+                           new Disposition
+                           {
+                               Id = 10,
+                               Name = "Meticulous",
+                               Category = "Habits",
+                               Discipline = "Information Systems",
+                               Description = "Attentive to Detail (Weber, 2017), (Nwokeji et al., 2019) Achieves thoroughness and accuracy when accomplishing a task through concern for relevant details."
+                           }
                     };                
 
                     context.Dispositions.AddRange(dispositions);
@@ -223,8 +286,8 @@ namespace MyData.Data
                 Task<Competency> comp = context.Competencies.FirstOrDefaultAsync(d => d.Id == 1);
 
                 if (comp.Result == null){
-
-                    List<CompetencyDisposition> cdList =  new List<CompetencyDisposition>{
+                    //LIST 1 DISPOSITIONS FOR A COMP
+                    List<CompetencyDisposition> cdList1 =  new List<CompetencyDisposition>{
                         new CompetencyDisposition{
                             Id =  1,
                             Disposition = dispositions[0]
@@ -234,8 +297,38 @@ namespace MyData.Data
                             Disposition = dispositions[1]
                         }
                     };
-
-                    List<KSPair> kSPairs = new List<KSPair>{
+                    //LIST 2 DISPOSITIONS FOR A COMP
+                     List<CompetencyDisposition> cdList2 =  new List<CompetencyDisposition>{
+                        new CompetencyDisposition{
+                            Id =  3,
+                            Disposition = dispositions[2]
+                        },
+                        new CompetencyDisposition{
+                            Id = 4,
+                            Disposition = dispositions[3]
+                        },
+                        new CompetencyDisposition{
+                            Id = 5,
+                            Disposition = dispositions[4]
+                        }
+                    };
+                    //LIST 3 DISPOSITIONS FOR A COMP
+                     List<CompetencyDisposition> cdList3 =  new List<CompetencyDisposition>{
+                        new CompetencyDisposition{
+                            Id =  6,
+                            Disposition = dispositions[5]
+                        },
+                        new CompetencyDisposition{
+                            Id = 7,
+                            Disposition = dispositions[6]
+                        },
+                          new CompetencyDisposition{
+                            Id = 8,
+                            Disposition = dispositions[7]
+                        }
+                    };
+                    //LIST 1 KSPAIRS
+                    List<KSPair> kSPairs1 = new List<KSPair>{
                         new KSPair{
                             KnowledgeElement = knowledgeElements[0],
                             SkillLevel = skillLevels[5],
@@ -246,18 +339,116 @@ namespace MyData.Data
                         }
                     };
 
-                    AtomicCompetency atomic = new AtomicCompetency{
-                        Id = 1,
-                        Name = "Disposition A",
-                        Description = "Do Stuff about A",
-                        CompetencyDispostions = cdList,
-                        KSPairs = kSPairs
+                   //LIST 2 KSPAIRS
+                    List<KSPair> kSPairs2 = new List<KSPair>{
+                        new KSPair{
+                            KnowledgeElement = knowledgeElements[0],
+                            SkillLevel = skillLevels[5],
+                        },
+                        new KSPair{
+                            KnowledgeElement = knowledgeElements[1],
+                            SkillLevel = skillLevels[4]
+                        }
                     };
+                    //LIST 3 KSPAIRS
+                    List<KSPair> kSPairs3 = new List<KSPair>{
+                        new KSPair{
+                            KnowledgeElement = knowledgeElements[6],
+                            SkillLevel = skillLevels[2],
+                        },
+                        new KSPair{
+                            KnowledgeElement = knowledgeElements[0],
+                            SkillLevel = skillLevels[3]
+                        },
+                         new KSPair{
+                            KnowledgeElement = knowledgeElements[2],
+                            SkillLevel = skillLevels[3]
+                        }
+                    };
+                           //LIST 4 KSPAIRS
+                    List<KSPair> kSPairs4 = new List<KSPair>{
+                        new KSPair{
+                            KnowledgeElement = knowledgeElements[6],
+                            SkillLevel = skillLevels[1],
+                        },
+                        new KSPair{
+                            KnowledgeElement = knowledgeElements[7],
+                            SkillLevel = skillLevels[2]
+                        },
+                          new KSPair{
+                            KnowledgeElement = knowledgeElements[8],
+                            SkillLevel = skillLevels[5],
+                        },
+                        new KSPair{
+                            KnowledgeElement = knowledgeElements[4],
+                            SkillLevel = skillLevels[5]
+                        }
+                    };
+                    
 
-                    context.Competencies.Add(atomic);
-                    context.SaveChanges();  
-                }                
+                 
+                   AtomicCompetency atom1 = new AtomicCompetency{ 
+                        Id = 1,
+                        Name = "Ichiban",
+                        Description = "The Best",
+                        CompetencyDispostions = cdList1,
+                        KSPairs = kSPairs1
+                    };
+                       context.Competencies.Add(atom1);
+                    context.SaveChanges(); 
+                //    AtomicCompetency atom2 = new  new AtomicCompetency{
+                //         Id = 2,
+                //         Name = "Niban",
+                //         Description = "The First Loser",
+                //         CompetencyDispostions = cdList2,
+                //         KSPairs = kSPairs2
+                //     };
+                //    AtomicCompetency atom3 = new  new AtomicCompetency{
+                //         Id = 3,
+                //         Name = "Sanban",
+                //         Description = "The Bronze Medal",
+                //         CompetencyDispostions = cdList3,
+                //         KSPairs = kSPairs3
+                //     };
+                //    AtomicCompetency atom4 = new  new AtomicCompetency{
+                //         Id = 4,
+                //         Name = "Yonban",
+                //         Description = "Complete Trash",
+                //         CompetencyDispostions = cdList3,
+                //         KSPairs = kSPairs4
+                //     }
+             
+     
+                //     context.Competencies.Add(atom1);
+                //     context.SaveChanges(); 
+            
+                    
+                //     List<ConstituentCompetency> atomicList = new List<ConstituentCompetency>{
+                //          new ConstituentCompetency{
+                //             Id =  1,
+                //             MemberCompetency = competencies[0]
+                //         },
+                //            new ConstituentCompetency{
+                //             Id =  3,
+                //             MemberCompetency = competencies[2]
+                //         }
+                        
+                //     };
+                //     CompositeCompetency composite1 = new CompositeCompetency{
+                //         Id = 3,
+                //         Name = "Sanban",
+                //         Description = "The Bronze Medal",
+                //         CompetencyDispostions = cdList1,
+                //         ConstituentCompetencies = atomicList
+                //     };
+                //     context.Competencies.Add(composite1);
+                //     context.SaveChanges();
+                }
             }
-        }        
+        }
     }
 }
+            
+                
+    
+

@@ -4,17 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using MyData.Data.Models;
 using Microsoft.Extensions.Logging;
+using MyData.Data.Models;
 using MyRepo;
 
-namespace CDKST.Pages.Knowledge
+namespace CDKST.Pages.SkillLevels
 {
     public class IndexModel : PageModel
     {
-         [BindProperty]
-        public IEnumerable<KnowledgeElement> KnowledgeElementList {get; set;}
+        [BindProperty]
+        public IEnumerable<SkillLevel> SkillLevelList {get; set;}
 
         private readonly ILogger<IndexModel> _logger;
         private readonly IUnitOfWork _UOW;
@@ -27,11 +26,11 @@ namespace CDKST.Pages.Knowledge
 
         public async Task OnGetAsync()
         {
-            //var repository = _UOW.GetRepository<DispositionInstance>();
-            var repository = _UOW.GetRepositoryAsync<KnowledgeElement>();
-
-           KnowledgeElementList = await repository.GetListAsync();
-
+            //var repository = _UOW.GetRepository<Disposition>();
+            var repository = _UOW.GetRepositoryAsync<SkillLevel>();
+            _logger.Log(LogLevel.Information, "Knowledge Elements Retrieved");
+            _logger.Log(LogLevel.Information, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"));
+            SkillLevelList = await repository.GetListAsync();
         }
     }
 }

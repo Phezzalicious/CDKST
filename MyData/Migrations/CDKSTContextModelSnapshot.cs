@@ -70,12 +70,17 @@ namespace MyData.Migrations
                     b.Property<int>("CompetencyId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CompositeCompetencyId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("MemberCompetencyId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompetencyId");
+
+                    b.HasIndex("CompositeCompetencyId");
 
                     b.HasIndex("MemberCompetencyId");
 
@@ -212,6 +217,10 @@ namespace MyData.Migrations
                         .HasForeignKey("CompetencyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("MyData.Data.Models.CompositeCompetency", null)
+                        .WithMany("ConstituentCompetencies")
+                        .HasForeignKey("CompositeCompetencyId");
 
                     b.HasOne("MyData.Data.Models.Competency", "MemberCompetency")
                         .WithMany()
