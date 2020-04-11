@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MyData.Data.Models.Disposition;
+using MyData.Data.Models;
 using Microsoft.Extensions.Logging;
 using MyRepo;
 
-namespace CDKST.Pages.Disposition
+namespace CDKST.Pages.Dispositions
 {
     public class IndexModel : PageModel
     {
          [BindProperty]
-        public IEnumerable<DispositionInstance> DispositionInstanceList {get; set;}
+        public IEnumerable<Disposition> DispositionList {get; set;}
 
         private readonly ILogger<IndexModel> _logger;
         private readonly IUnitOfWork _UOW;
@@ -28,9 +28,9 @@ namespace CDKST.Pages.Disposition
         public async Task OnGetAsync()
         {
             //var repository = _UOW.GetRepository<DispositionInstance>();
-            var repository = _UOW.GetRepositoryAsync<DispositionInstance>();
+            var repository = _UOW.GetRepositoryAsync<Disposition>();
 
-           DispositionInstanceList = await repository.GetListAsync();
+           DispositionList = await repository.GetListAsync();
 
         }
     }

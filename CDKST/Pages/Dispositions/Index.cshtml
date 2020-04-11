@@ -1,5 +1,5 @@
 @page
-@model CDKST.Pages.Disposition.IndexModel
+@model CDKST.Pages.Dispositions.IndexModel
 
 @{
     
@@ -26,13 +26,15 @@
         </thead>
 
         <tbody>
-            @foreach (var disposition in Model.DispositionInstanceList)
+            @foreach (var disposition in Model.DispositionList)
             {
                 <tr>
                     <th scope="row">@count</th>
-                    <td>@disposition.term_identifier</td>
-                    <td>@disposition.cartesian_index</td>
-                    <td>@disposition.descriptor</td>
+                    <td>@disposition.Name</td>
+                    <td>@disposition.Category</td>
+                    <td>@disposition.Description</td>
+                    <td>@disposition.Discipline</td>
+                   
                 </tr>
                 { count++; }
             }

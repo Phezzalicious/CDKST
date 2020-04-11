@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MyData.Data.Models.Knowledge;
+using MyData.Data.Models;
 using Microsoft.Extensions.Logging;
 using MyRepo;
 

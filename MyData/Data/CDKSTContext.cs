@@ -1,49 +1,39 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MyData.Data.Models.Skill;
-using MyData.Data.Models.Knowledge;
-using MyData.Data.Models.Disposition;
-using MyData.Data.Models.Competency;
-using MyData.Data.Models.Task;
+using Pomelo.EntityFrameworkCore.MySql;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using MyData.Data.Models;
+using MyRepo;
+using MyRepo.DependencyInjection;
 
 namespace MyData.Data
 {
-
-
-
     public class CDKSTContext : DbContext
     {
-        public CDKSTContext(DbContextOptions<CDKSTContext> options)
-            : base(options)
+        public CDKSTContext(DbContextOptions<CDKSTContext> options) : base(options)
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.EnableSensitiveDataLogging();
+        }        
 
-        public DbSet<MyData.Data.Models.Skill.SkillLevel> SkillLevel { get; set; }
+        public DbSet<Competency> Competencies { get; set;}
+        public DbSet<AtomicCompetency> AtomicCompetencies {get; set;}
+        public DbSet<CompositeCompetency> CompositeCompetencies {get; set;}
+        public DbSet<ConstituentCompetency> ConstituentCompetencies {get; set;}
+        public DbSet<Disposition> Dispositions { get; set; }
+        public DbSet<CompetencyDisposition> CompetencyDispositions {get; set;}
+        public DbSet<KnowledgeElement> KnowledgeElements { get; set;}
+        public DbSet<SkillLevel> SkillLevels {get; set;}
+        public DbSet<KSPair> KSPairs {get; set;}
 
-
-        public DbSet<MyData.Data.Models.Knowledge.KnowledgeElement> KnowledgeElement { get; set; }
-
-
-        public DbSet<MyData.Data.Models.Disposition.DispositionInstance> DispositionInstance { get; set; }
-
-        public DbSet<MyData.Data.Models.Competency.Composite> Composite { get; set; }
-
-        public DbSet<MyData.Data.Models.Competency.Atomic> Atomic { get; set; }
-
-        public DbSet<MyData.Data.Models.Task.Task> Task { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           base.OnModelCreating(Seeding.SeedDispositionInstance(modelBuilder));
-           base.OnModelCreating(Seeding.SeedSkillLevel(modelBuilder));
-           base.OnModelCreating(Seeding.SeedKnowledgeElement(modelBuilder));
-           // base.OnModelCreating(Seeding.SeedAtomic(modelBuilder));
-           // base.OnModelCreating(Seeding.SeedComposites(modelBuilder));
-        }
-
-
+            base.OnModelCreating(modelBuilder);
+        }        
     }
 }
