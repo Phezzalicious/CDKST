@@ -1,0 +1,91 @@
+@page
+@model CDKST.Pages.Wizard.Page4Model
+@{
+    ViewData["Title"] = "Competency Wizard Page 4";
+}
+
+
+<div class="jumbotron text-center">
+    <h1 class="mx-auto my-0 text-uppercase">Step 4</h1>
+<h3 class="font-weight-bolder">Please select the Knowledge Elements required and specify the Skill Level</h3>
+</div>
+
+
+<hr>
+<div class="row">
+    <div class="col-sm-4">
+        <div>
+            <p class="font-weight-bolder">Session variable inputs</p>        
+        </div>
+        <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Competency Builder JSON</li>
+                <li class="list-group-item">@HttpContext.Session.GetString(Page1Model.SerializedCompetencyJSONKey)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <form method="post">
+            <div class="form-group row">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Select</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Cartesian Index</th>
+                            <th scope="col">Semiotic Index</th>
+                            <th scope="col">Etymology</th>
+                            <th scopoe="col">Skill Level</th>        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @* https://www.learnrazorpages.com/razor-pages/forms/checkboxes#collections-of-complex-objects *@
+                        @foreach (var element in Model.KnowledgeDisplayList)
+                        {
+                            <tr>
+                                <td><input asp-for="@element.Selected"></td>
+                                <th scope="row">
+                                    <input type="hidden" 
+                                            asp-for="@element.Id" />
+                                    @element.Id
+                                </th>
+                                <td>
+                                    <input type="hidden" 
+                                            asp-for="@element.Name" />
+                                    @element.Name
+                                </td>
+                                <td>@element.Description</td>
+                                <td>@element.CartesianIndex</td>
+                                <td>@element.SemioticIndex</td>
+                                <td>@element.Etymology</td>
+                                <td>  
+                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" asp-for="@element.SkillLevel">
+                                        <option selected>Choose...</option>
+                                        @foreach (var level in Model.Slist)
+                                        {
+                                            <option value="@level.Id">@level.Name</option>
+                                        }
+                                    </select>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>    
+                <div class="form-group row">
+                @* These are important to take advantage of the BindProperty *@
+                <input type="hidden" asp-for="CompetencyName">
+                <input type="hidden" asp-for="CompetencyDescription">
+                <input type="hidden" asp-for="DispositionIndicies">
+                <input type="hidden" asp-for="KSPairsIndicies">
+                <button name="submit" type="submit" class="btn btn-primary">
+                    Review
+                    <i class="fas fa-angle-double-right"></i>
+                </button>
+            </div>  
+        </form>          
+
+    </div>
+</div>

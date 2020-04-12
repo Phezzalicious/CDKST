@@ -5,8 +5,12 @@
 }
 
 
-<h2>Select Dispositions - Step 2</h2>
-<p class="font-weight-bolder">Select Dispositions for the competency.</p>
+<div class="jumbotron text-center">
+<h1>Step 2</h1>
+<h3 class="font-weight-bolder">Select Dispositions for the competency.</h3>
+</div>
+
+
 <hr>
 <div class="row">
     <div class="col-sm-4">
@@ -67,6 +71,7 @@
                     @* These are important to take advantage of the BindProperty *@
                     <input type="hidden" asp-for="CompetencyName">
                     <input type="hidden" asp-for="CompetencyDescription">
+                    <input type="hidden" asp-for="DispositionIndicies">
                     <button name="submit" type="submit" class="btn btn-primary">
                         Step 3
                         <i class="fas fa-angle-double-right"></i>

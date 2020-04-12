@@ -3,8 +3,14 @@
 @{
     ViewData["Title"] = "Competency Wizard Page 3";
 }
-<h2>Atomic or Composite Quesiton - Step 3</h2>
-<p class="font-weight-bolder">Atomic or Composite Competency?</p>
+
+
+<div class="jumbotron text-center">
+    <h1 class="mx-auto my-0 text-uppercase">Step 3</h1>
+<h3 class="font-weight-bolder">Atomic or Composite Competency?</h3>
+</div>
+
+
 <hr>
 <div class="row">
     <div class="col-sm-4">
@@ -18,4 +24,19 @@
             </ul>
         </div>
     </div>
+    <div class="col-sm-8">
+        <form method="post">
+            @foreach (var comp in Model.CompetencyTypes)
+            {
+                <input type="radio" asp-for="IsComposite" value="@comp" />@comp<br />
+            }
+            <input type="hidden" asp-for="CompetencyName">
+            <input type="hidden" asp-for="CompetencyDescription">
+            <input type="hidden" asp-for="DispositionIndicies">
+            <input type="hidden" asp-for="IsComposite">
+            <input type="submit"/>
+   
+        </form>
+    </div>
 </div>
+

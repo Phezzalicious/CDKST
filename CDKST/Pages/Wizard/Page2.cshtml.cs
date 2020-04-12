@@ -29,9 +29,11 @@ namespace CDKST.Pages.Wizard
         [BindProperty]
         [Display(Name="Competency Description")]        
         public string CompetencyDescription {get; set;}
-
         [BindProperty]
-        public IEnumerable<Disposition> DispositionList {get; set;}   
+        [Display(Name="Disposition Indicies")]        
+        public int[] DispositionIndicies {get; set;}
+
+    
 
         [BindProperty]
         public List<DispositionSelectorModel> DispositionDisplayList  {get; set;}
@@ -84,7 +86,8 @@ namespace CDKST.Pages.Wizard
                     _logger.LogInformation($"Added: {dsm.Id.ToString()} to the indicies");
                     _logger.LogInformation(dsm.Name);
                 }
-            }            
+            }      
+            DispositionIndicies = temp.ToArray();       
 
             if(string.IsNullOrEmpty(HttpContext.Session.GetString(SerializedCompetencyJSONKey)))
             {
@@ -93,7 +96,7 @@ namespace CDKST.Pages.Wizard
 
                 Cbvm.CompetencyName = CompetencyName;
                 Cbvm.CompetencyDescription = CompetencyDescription;
-                Cbvm.DispositionIndicies = temp.ToArray();                
+                Cbvm.DispositionIndicies =  DispositionIndicies;              
 
                 var serialized = JsonSerializer.Serialize(Cbvm);
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serialized);
@@ -109,7 +112,7 @@ namespace CDKST.Pages.Wizard
                 Cbvm.CompetencyDescription = CompetencyDescription;
                 _logger.LogInformation($"IN POST PAGE 2, Session out: {Cbvm.CompetencyDescription}");
                 Cbvm.DispositionIndicies = temp.ToArray();                
-
+                 _logger.LogInformation($"IN POST PAGE 2, Session out: {Cbvm.DispositionIndicies}");
                 var serializedout = JsonSerializer.Serialize(Cbvm);
                 _logger.LogInformation($"IN POST PAGE 2, Serialized out: {serializedout.ToString()}");
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serializedout);                

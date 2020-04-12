@@ -1,0 +1,83 @@
+@page
+@model CDKST.Pages.Wizard.Page6Model
+@{
+    ViewData["Title"] = "Competency Wizard Page 6";
+}
+
+
+<div class="jumbotron text-center">
+    <h1 class="mx-auto my-0 text-uppercase">Review</h1>
+<h3 class="font-weight-bolder">Please select the Knowledge Elements required and specify the Skill Level</h3>
+</div>
+
+
+<hr>
+<div class="row">
+    <div class="col-sm-4">
+        <div>
+            <p class="font-weight-bolder">Session variable inputs</p>        
+        </div>
+        <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Competency Builder JSON</li>
+                <li class="list-group-item">@HttpContext.Session.GetString(Page1Model.SerializedCompetencyJSONKey)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        @* Name *@
+        <div class="row">
+            <h3>@Model.CompetencyName</h3>
+        </div>
+        @* Description *@
+         <div class="row">
+            <h4>@Model.CompetencyDescription</h4>
+        </div>
+        @* Dispositions *@
+         <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Discipline</th>
+                    <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @* @foreach (var disp in Model.DispositionList)
+                    {
+                        <td>@disp.Id</td>
+                        <td>@disp.Name</td>
+                        <td>@disp.Category</td>
+                        <td>@disp.Discipline</td>
+                        <td>@disp.Description</td>
+                    } *@
+                </tbody>
+            </table>
+        </div>
+        @* KSPAIRS *@
+         <div class="row">
+             <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Knowledge Element</th>
+                    <th scope="col">Skill Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @* @for(int i = 0; i< Model.Knowledges.Count; i++)
+                    {
+                        <td></td>
+                        <td>@Model.Knowledges[i].Name</td>
+                        <td>@Model.Skills[i].Name</td>
+                        
+                    } *@
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
