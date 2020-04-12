@@ -322,18 +322,50 @@ namespace MyData.Data
                             Id = 7,
                             Disposition = dispositions[6]
                         },
-                          new CompetencyDisposition{
+                        new CompetencyDisposition{
                             Id = 8,
                             Disposition = dispositions[7]
+                        }
+                    };
+                    //LIST 4 DISPOSITIONS FOR A COMP
+                     List<CompetencyDisposition> cdList4 =  new List<CompetencyDisposition>{
+                        new CompetencyDisposition{
+                            Id =  9,
+                            Disposition = dispositions[0]
+                        },
+                        new CompetencyDisposition{
+                            Id = 10,
+                            Disposition = dispositions[8]
+                        },
+                        new CompetencyDisposition{
+                            Id = 11,
+                            Disposition = dispositions[7]
+                        }
+                    };
+                    //LIST 5 DISPOSITIONS FOR A COMP
+                     List<CompetencyDisposition> cdList5 =  new List<CompetencyDisposition>{
+                        new CompetencyDisposition{
+                            Id =  12,
+                            Disposition = dispositions[2]
+                        },
+                        new CompetencyDisposition{
+                            Id = 13,
+                            Disposition = dispositions[9]
+                        },
+                        new CompetencyDisposition{
+                            Id = 14,
+                            Disposition = dispositions[8]
                         }
                     };
                     //LIST 1 KSPAIRS
                     List<KSPair> kSPairs1 = new List<KSPair>{
                         new KSPair{
+                            Id =1,
                             KnowledgeElement = knowledgeElements[0],
                             SkillLevel = skillLevels[5],
                         },
                         new KSPair{
+                            Id =2,
                             KnowledgeElement = knowledgeElements[1],
                             SkillLevel = skillLevels[4]
                         }
@@ -341,45 +373,57 @@ namespace MyData.Data
 
                    //LIST 2 KSPAIRS
                     List<KSPair> kSPairs2 = new List<KSPair>{
+                           
                         new KSPair{
+                            Id =3,
                             KnowledgeElement = knowledgeElements[0],
                             SkillLevel = skillLevels[5],
                         },
                         new KSPair{
+                            Id =4,
                             KnowledgeElement = knowledgeElements[1],
                             SkillLevel = skillLevels[4]
                         }
                     };
                     //LIST 3 KSPAIRS
                     List<KSPair> kSPairs3 = new List<KSPair>{
+                         
                         new KSPair{
+                              Id =5,
                             KnowledgeElement = knowledgeElements[6],
                             SkillLevel = skillLevels[2],
                         },
                         new KSPair{
+                              Id =6,
                             KnowledgeElement = knowledgeElements[0],
                             SkillLevel = skillLevels[3]
                         },
                          new KSPair{
+                               Id =7,
                             KnowledgeElement = knowledgeElements[2],
                             SkillLevel = skillLevels[3]
                         }
                     };
-                           //LIST 4 KSPAIRS
+                    //LIST 4 KSPAIRS
                     List<KSPair> kSPairs4 = new List<KSPair>{
+                           
                         new KSPair{
+                              Id =8,
                             KnowledgeElement = knowledgeElements[6],
                             SkillLevel = skillLevels[1],
                         },
                         new KSPair{
+                            Id =9,
                             KnowledgeElement = knowledgeElements[7],
                             SkillLevel = skillLevels[2]
                         },
                           new KSPair{
-                            KnowledgeElement = knowledgeElements[8],
+                              Id =10,
+                            KnowledgeElement = knowledgeElements[5],
                             SkillLevel = skillLevels[5],
                         },
                         new KSPair{
+                            Id =11,
                             KnowledgeElement = knowledgeElements[4],
                             SkillLevel = skillLevels[5]
                         }
@@ -391,58 +435,41 @@ namespace MyData.Data
                         Id = 1,
                         Name = "Ichiban",
                         Description = "The Best",
-                        CompetencyDispostions = cdList1,
+                        CompetencyDispostions = cdList2,
                         KSPairs = kSPairs1
                     };
                        context.Competencies.Add(atom1);
                     context.SaveChanges(); 
-                //    AtomicCompetency atom2 = new  new AtomicCompetency{
-                //         Id = 2,
-                //         Name = "Niban",
-                //         Description = "The First Loser",
-                //         CompetencyDispostions = cdList2,
-                //         KSPairs = kSPairs2
-                //     };
-                //    AtomicCompetency atom3 = new  new AtomicCompetency{
-                //         Id = 3,
-                //         Name = "Sanban",
-                //         Description = "The Bronze Medal",
-                //         CompetencyDispostions = cdList3,
-                //         KSPairs = kSPairs3
-                //     };
-                //    AtomicCompetency atom4 = new  new AtomicCompetency{
-                //         Id = 4,
-                //         Name = "Yonban",
-                //         Description = "Complete Trash",
-                //         CompetencyDispostions = cdList3,
-                //         KSPairs = kSPairs4
-                //     }
+                   AtomicCompetency atom2 = new AtomicCompetency{
+                        Id = 2,
+                        Name = "Niban",
+                        Description = "The First Loser",
+                        CompetencyDispostions = cdList1,
+                        KSPairs = kSPairs2
+                    };
+                        context.Competencies.Add(atom2);
+                    context.SaveChanges(); 
+                   AtomicCompetency atom3 = new AtomicCompetency{
+                        Id = 3,
+                        Name = "Sanban",
+                        Description = "The Bronze Medal",
+                        CompetencyDispostions = cdList3,
+                        KSPairs = kSPairs3
+                    };
+                    context.Competencies.Add(atom3);
+                    context.SaveChanges(); 
+                   AtomicCompetency atom4 = new AtomicCompetency{
+                        Id = 4,
+                        Name = "Yonban",
+                        Description = "Complete Trash",
+                        CompetencyDispostions = cdList4,
+                        KSPairs = kSPairs4
+                    };
              
      
-                //     context.Competencies.Add(atom1);
-                //     context.SaveChanges(); 
+                    context.Competencies.Add(atom4);
+                    context.SaveChanges(); 
             
-                    
-                //     List<ConstituentCompetency> atomicList = new List<ConstituentCompetency>{
-                //          new ConstituentCompetency{
-                //             Id =  1,
-                //             MemberCompetency = competencies[0]
-                //         },
-                //            new ConstituentCompetency{
-                //             Id =  3,
-                //             MemberCompetency = competencies[2]
-                //         }
-                        
-                //     };
-                //     CompositeCompetency composite1 = new CompositeCompetency{
-                //         Id = 3,
-                //         Name = "Sanban",
-                //         Description = "The Bronze Medal",
-                //         CompetencyDispostions = cdList1,
-                //         ConstituentCompetencies = atomicList
-                //     };
-                //     context.Competencies.Add(composite1);
-                //     context.SaveChanges();
                 }
             }
         }
