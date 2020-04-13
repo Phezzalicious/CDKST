@@ -22,7 +22,8 @@ namespace MyRepo
         ValueTask<EntityEntry<T>> AddAsync(T entity, CancellationToken cancellationToken = default(CancellationToken));
         Task AddAsync(params T[] entities);
         Task AddAsync(IEnumerable<T> entities, CancellationToken cancellationToken = default(CancellationToken));
-
+                //going to test against this 
+        ValueTask<EntityEntry<T>> DeleteAsync(int? id );
         // Task Delete(T entity, CancellationToken cancellationToken = default(CancellationToken));
          //Task DeleteAsync(object id);
         // Task Delete(params T[] entities);

@@ -67,13 +67,11 @@ namespace MyRepo
         {
             _dbSet.Update(entity);
         }
-        // public async ValueTask<EntityEntry<T>> DeleteAsync(int? id ){
-           
-        //    var myEntity = await _dbSet.FindAsync(id);
-           
-        //     return _dbSet.Remove(myEntity);
-        
-        // }
+            //going to test against this 
+        public async ValueTask<EntityEntry<T>> DeleteAsync(int? id ){
+           var myEntity = await _dbSet.FindAsync(id);
+            return _dbSet.Remove(myEntity);
+        }    
 
 
     }
