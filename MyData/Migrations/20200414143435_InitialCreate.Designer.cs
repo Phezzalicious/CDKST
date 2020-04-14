@@ -9,7 +9,7 @@ using MyData.Data;
 namespace MyData.Migrations
 {
     [DbContext(typeof(CDKSTContext))]
-    [Migration("20200411175047_InitialCreate")]
+    [Migration("20200414143435_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
