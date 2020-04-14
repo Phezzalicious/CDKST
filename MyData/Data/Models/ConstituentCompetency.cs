@@ -6,6 +6,8 @@ namespace MyData.Data.Models
 {
     public class ConstituentCompetency
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id {get; set;}
         public Competency MemberCompetency{get; set;}
 

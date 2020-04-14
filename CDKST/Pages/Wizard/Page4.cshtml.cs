@@ -57,7 +57,10 @@ namespace CDKST.Pages.Wizard
 
 
         public async Task OnGetAsync()
+        //I am having the user pick knowledge elements and determining their skill levels. 
+        //I will need all the knowledges and skills from the database to use on the .cshtml side
         {
+            _logger.Log(LogLevel.Information, "Page 4 onGet");
             //wheres my session at
             await HttpContext.Session.LoadAsync();            
             //read serialized object from session variable
@@ -68,18 +71,25 @@ namespace CDKST.Pages.Wizard
             CompetencyName = Cbvm.CompetencyName;
             CompetencyDescription = Cbvm.CompetencyDescription;
             DispositionIndicies = Cbvm.DispositionIndicies;
+            //Make the Units of work (RepositoryAsyncs) I need. Know, Skill
             var repositoryK = _UOW.GetRepositoryAsync<KnowledgeElement>();
             var repositoryS = _UOW.GetRepositoryAsync<SkillLevel>();
+            //Grab all the knowledges
             IEnumerable<KnowledgeElement> klist = await repositoryK.GetListAsync();
+            //grab all the skills
             IEnumerable<SkillLevel> slist = await repositoryS.GetListAsync();
+
+            //Makes my list of viewmodel objects to save the kspairs ----- Utility Method at Bottom of File
             KnowledgeDisplayList = GetKnowledgeDisplayList(klist.ToList());
+
+            //Save these so I can display them in the form dropdown
             Slist=slist;
            
-            _logger.Log(LogLevel.Information, "Page 4 onGet");
-            _logger.LogInformation($"COMPNAME: {CompetencyName}");
-            _logger.LogInformation($"COMPDESCR: {CompetencyDescription}");
-            _logger.LogInformation($"DISPINDICE: {DispositionIndicies[0]}");
-            _logger.LogInformation($"KDISPLIST: {KnowledgeDisplayList.Count()}");
+           
+            // _logger.LogInformation($"COMPNAME: {CompetencyName}");
+            // _logger.LogInformation($"COMPDESCR: {CompetencyDescription}");
+            // _logger.LogInformation($"DISPINDICE: {DispositionIndicies[0]}");
+            // _logger.LogInformation($"KDISPLIST: {KnowledgeDisplayList.Count()}");
 
 
 
@@ -87,22 +97,28 @@ namespace CDKST.Pages.Wizard
         }
          public async Task<IActionResult>  OnPostAsync(){
 
-            _logger.LogInformation("IN ON POST ASYNC");
-            _logger.LogInformation("KNOWLEDGEDISPLAYLIST: "+ KnowledgeDisplayList.Count());
+            _logger.LogInformation("IN ON POST ASYNC Page 4");
+            //_logger.LogInformation("KNOWLEDGEDISPLAYLIST: "+ KnowledgeDisplayList.Count());
 
+            //Where My Session At? 
             await HttpContext.Session.LoadAsync();
-            //store my indicies, first dimension is each knowledge selector model and second dimension is knowledge - skill id
-             List<int> temp = new List<int>();
+
+           //temporary list of integers to hold my unkown amount kspairindices
+            List<int> temp = new List<int>();
             foreach(KnowledgeSelectorModel ksm in KnowledgeDisplayList)
             {
-                 _logger.LogInformation("In my FOREACH");
+                //  _logger.LogInformation("In my FOREACH");
                 if(ksm.Selected){
+                    //populate my list, even indices will be my knowledgeElement Ids and Odd will be the correlated Skill Ids
                     temp.Add(ksm.Id);
                     temp.Add(ksm.SkillLevel);
-                    _logger.LogInformation($"Added: {ksm.Id.ToString()} to the indicies");
-                    _logger.LogInformation(ksm.Name);
+
+                    // _logger.LogInformation($"Added: {ksm.Id.ToString()} to the indicies");
+                    // _logger.LogInformation(ksm.Name);
                 }
-            }      
+            }  
+
+            //Save the carefully constructed result to my KSPairIndicies, casting it fro ma list to an array    
             KSPairsIndicies =  temp.ToArray();       
         
             //_logger.LogInformation("temp : " + temp[0]);
@@ -113,13 +129,16 @@ namespace CDKST.Pages.Wizard
             {
                 //if so, make a new one 
                 Cbvm = new CompetencyBuilderViewModel();
+
                 //fill it with what i want
                 Cbvm.CompetencyName = CompetencyName;
                 Cbvm.CompetencyDescription = CompetencyDescription;
                 Cbvm.DispositionIndicies = DispositionIndicies; 
-                Cbvm.KSPairsIndicies = KSPairsIndicies;              
+                Cbvm.KSPairsIndicies = KSPairsIndicies;  
+
                 //pack it up 
                 var serialized = JsonSerializer.Serialize(Cbvm);
+
                 //send it out
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serialized);
 
@@ -130,19 +149,21 @@ namespace CDKST.Pages.Wizard
 
                 //fill it with what i want
                 Cbvm.CompetencyName = CompetencyName;
-                _logger.LogInformation($"IN POST PAGE 4, Session out: {CompetencyName}");
-                _logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.CompetencyName}");
                 Cbvm.CompetencyDescription = CompetencyDescription;
-                _logger.LogInformation($"IN POST PAGE 4, Session out: {CompetencyDescription}");
-                _logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.CompetencyDescription}");
                 Cbvm.DispositionIndicies = DispositionIndicies;  
-                _logger.LogInformation($"IN POST PAGE 4, Session out: {DispositionIndicies[0]}");
-                _logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.DispositionIndicies}");              
-                Cbvm.KSPairsIndicies = KSPairsIndicies;  
+                Cbvm.KSPairsIndicies = KSPairsIndicies;
+                // _logger.LogInformation($"IN POST PAGE 4, Session out: {CompetencyName}");
+                // _logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.CompetencyName}");
+                // _logger.LogInformation($"IN POST PAGE 4, Session out: {CompetencyDescription}");
+                // _logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.CompetencyDescription}");
+                // _logger.LogInformation($"IN POST PAGE 4, Session out: {DispositionIndicies[0]}");
+                // _logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.DispositionIndicies}");                
                 //_logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.KSPairsIndicies[0]}");
+
                 //pack it up 
                 var serializedout = JsonSerializer.Serialize(Cbvm);
-                _logger.LogInformation($"IN POST PAGE 4, Serialized out: {serializedout.ToString()}");
+                //_logger.LogInformation($"IN POST PAGE 4, Serialized out: {serializedout.ToString()}");
+
                 //send it out
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serializedout);                
             }

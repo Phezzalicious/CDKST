@@ -7,6 +7,7 @@ namespace MyData.Data.Models
     public class Competency
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id {get; set;}
         public string Name {get; set;}
         [DataType(DataType.Text)]

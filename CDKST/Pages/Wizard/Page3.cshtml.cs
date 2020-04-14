@@ -34,6 +34,7 @@ namespace CDKST.Pages.Wizard
 
         [BindProperty]
         public string IsComposite { get; set; }
+        //Unnecessary, I just liked the array here, totally should make IsComposite a Bool
         public string[] CompetencyTypes = new[] { "Atomic", "Composite"};
 
         public CompetencyBuilderViewModel Cbvm {get; set;}
@@ -48,8 +49,9 @@ namespace CDKST.Pages.Wizard
         }
 
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync()//I dont need to do much besides preserve my data on this page, We are asking if it will be atomic or composite
         {
+            _logger.LogInformation("OnGet Page 3");
             //wheres my session at
             await HttpContext.Session.LoadAsync();            
 
@@ -61,16 +63,18 @@ namespace CDKST.Pages.Wizard
             CompetencyName = Cbvm.CompetencyName;
             CompetencyDescription = Cbvm.CompetencyDescription;
             DispositionIndicies = Cbvm.DispositionIndicies;
-            _logger.Log(LogLevel.Information, "Page 3 onGet");
-            _logger.LogInformation($"COMPNAME: {CompetencyName}");
-            _logger.LogInformation($"COMPDESCR: {CompetencyDescription}");
-            _logger.LogInformation($"DISPINDICE: {DispositionIndicies[0]}");
-        }
-         public async Task<IActionResult>  OnPostAsync(){
 
-            _logger.LogInformation("IN ON POST ASYNC");
-             _logger.LogInformation($"CompName: {CompetencyName}");
-            _logger.LogInformation($"DISP: {DispositionIndicies[0]}");
+        //     _logger.LogInformation($"COMPNAME: {CompetencyName}");
+        //     _logger.LogInformation($"COMPDESCR: {CompetencyDescription}");
+        //     _logger.LogInformation($"DISPINDICE: {DispositionIndicies[0]}");
+        }
+         public async Task<IActionResult>  OnPostAsync(){//Move my data along and read the form result to direct to the correct page 
+
+            _logger.LogInformation("IN ON POST ASYNC PAGE 3");
+            //  _logger.LogInformation($"CompName: {CompetencyName}");
+            // _logger.LogInformation($"DISP: {DispositionIndicies[0]}");
+
+            //Where My Session At?
             await HttpContext.Session.LoadAsync();
 
                   
@@ -95,25 +99,29 @@ namespace CDKST.Pages.Wizard
 
                 //fill it with what i want
                 Cbvm.CompetencyName = CompetencyName;
-                _logger.LogInformation($"IN POST PAGE 3, Session in: {CompetencyName}");
-                _logger.LogInformation($"IN POST PAGE 3, Session out: {Cbvm.CompetencyName}");
-                Cbvm.CompetencyDescription = CompetencyDescription;
-                _logger.LogInformation($"IN POST PAGE 3, Session in: {CompetencyDescription}");
-                _logger.LogInformation($"IN POST PAGE 3, Session out: {Cbvm.CompetencyDescription}");
+                Cbvm.CompetencyDescription = CompetencyDescription;                
                 Cbvm.DispositionIndicies = DispositionIndicies;  
-                _logger.LogInformation($"IN POST PAGE 3, Session in: {DispositionIndicies[0]}");
-                _logger.LogInformation($"IN POST PAGE 3, Session out: {Cbvm.DispositionIndicies[0]}");              
                 Cbvm.KSPairsIndicies = new int[0];
+                //  _logger.LogInformation($"IN POST PAGE 3, Session in: {CompetencyName}");
+                // _logger.LogInformation($"IN POST PAGE 3, Session out: {Cbvm.CompetencyName}");
+                // _logger.LogInformation($"IN POST PAGE 3, Session in: {CompetencyDescription}");
+                // _logger.LogInformation($"IN POST PAGE 3, Session out: {Cbvm.CompetencyDescription}");
+                // _logger.LogInformation($"IN POST PAGE 3, Session in: {DispositionIndicies[0]}");
+                // _logger.LogInformation($"IN POST PAGE 3, Session out: {Cbvm.DispositionIndicies[0]}");   
+
                 //pack it up 
                 var serializedout = JsonSerializer.Serialize(Cbvm);
                 _logger.LogInformation($"IN POST PAGE 3, Serialized out: {serializedout.ToString()}");
+
                 //send it out
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serializedout);                
             }
+            //Redirect based on form result 
             if(IsComposite == "Atomic"){
                  return RedirectToPage("/Wizard/Page4");
             }else{
-                 return RedirectToPage("/Wizard/Page5");
+                //PUNKED. WE ONLY DO ATOMICS
+                 return RedirectToPage("/Wizard/Page4");
             }
            
 

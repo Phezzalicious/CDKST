@@ -6,6 +6,8 @@ namespace MyData.Data.Models
 {
     public class CompetencyDisposition
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id {get; set;}
         public Disposition Disposition{get; set;}
 

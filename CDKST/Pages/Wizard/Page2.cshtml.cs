@@ -52,8 +52,9 @@ namespace CDKST.Pages.Wizard
         public async Task OnGetAsync()
         {
 
-            _logger.LogInformation("IN ON GET ASYNC");
+            _logger.LogInformation("IN ON GET ASYNC PAGE 2");
 
+            //Where My Session At?
             await HttpContext.Session.LoadAsync();            
 
             //read from session variable
@@ -67,14 +68,16 @@ namespace CDKST.Pages.Wizard
             //get dispositions
             var repository = _UOW.GetRepositoryAsync<Disposition>();
             IEnumerable<Disposition> dlist = await repository.GetListAsync();
+            //Utility method at bottom of file 
             DispositionDisplayList = GetDispositionDisplayList(dlist.ToList());
             _logger.Log(LogLevel.Information, "Dispositions Retrieved and Converted");
         }
 
         public async Task<IActionResult>  OnPostAsync(){
 
-            _logger.LogInformation("IN ON POST ASYNC");
+            _logger.LogInformation("IN ON POST ASYNC Page 2");
 
+            //Where My Session At?
             await HttpContext.Session.LoadAsync();
 
             List<int> temp = new List<int>();
@@ -91,14 +94,15 @@ namespace CDKST.Pages.Wizard
 
             if(string.IsNullOrEmpty(HttpContext.Session.GetString(SerializedCompetencyJSONKey)))
             {
-
+                //Make it new
                 Cbvm = new CompetencyBuilderViewModel();
-
+                //Fill it 
                 Cbvm.CompetencyName = CompetencyName;
                 Cbvm.CompetencyDescription = CompetencyDescription;
                 Cbvm.DispositionIndicies =  DispositionIndicies;              
-
+                //Pack it up
                 var serialized = JsonSerializer.Serialize(Cbvm);
+                //Send it out 
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serialized);
 
             }else {
@@ -122,7 +126,7 @@ namespace CDKST.Pages.Wizard
             return RedirectToPage("/Wizard/Page3");
 
         }
-
+        // I do not know what this is, currently autoMagic
         /// <summary>
         /// Convert to a list that we can use in the page.
         /// </summary>

@@ -7,7 +7,7 @@
 
 <div class="jumbotron text-center">
     <h1 class="mx-auto my-0 text-uppercase">Review</h1>
-<h3 class="font-weight-bolder">Please Confirm the makeup of your Competency</h3>
+<h3 class="font-weight-bolder">Bask in the glory of your new Competency</h3>
 </div>
 
 
@@ -92,22 +92,7 @@
                     
                 </tbody>
             </table>
-            <form method="post">
-                <input type="hidden" asp-for="CompetencyName">
-                <input type="hidden" asp-for="CompetencyDescription">
-                @for(int i = 0; i < Model.DispositionIndicies.Count(); i++)
-                {
-                    <input type="hidden" asp-for="DispositionIndicies[i]">
-                }
-                @for (int i = 0; i < Model.KSPairsIndicies.Count(); i++)
-                {
-                    <input type="hidden" asp-for="KSPairsIndicies[i]">
-                }
-         
-                <button type="submit">
-                    Confirm
-                </button>
-            </form>
+        
             
         </div>
     </div>

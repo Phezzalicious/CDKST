@@ -6,6 +6,8 @@ namespace MyData.Data.Models
 {
     public class KnowledgeElement
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id {get; set;}
 
         public string Name {get; set;}
