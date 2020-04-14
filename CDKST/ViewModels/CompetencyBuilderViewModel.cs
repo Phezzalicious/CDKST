@@ -9,6 +9,6 @@ namespace CDKST.ViewModels
         public string CompetencyDescription {get; set;}
         public int[] DispositionIndicies {get; set;}
         public int[] ConstituentCompetenciesIndicies {get; set;}
-        public int[][] KSPairsIndicies {get; set;}
+        public int[] KSPairsIndicies {get; set;}
     }
 }

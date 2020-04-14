@@ -32,7 +32,11 @@
             }
             <input type="hidden" asp-for="CompetencyName">
             <input type="hidden" asp-for="CompetencyDescription">
-            <input type="hidden" asp-for="DispositionIndicies">
+            @for(int i = 0; i < Model.DispositionIndicies.Count(); i++)
+            {
+                <input type="hidden" asp-for="DispositionIndicies[i]">
+            }
+            
             <input type="submit"/>
         </form>
     </div>

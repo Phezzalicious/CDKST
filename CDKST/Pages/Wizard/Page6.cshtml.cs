@@ -32,12 +32,12 @@ namespace CDKST.Pages.Wizard
         [Display(Name="Dispositions")]        
         public int[] DispositionIndicies {get; set;}
         [Display(Name="KSPairs")]        
-        public int[][] KSPairsIndicies {get; set;}
+        public int[] KSPairsIndicies {get; set;}
         
 
-        public List<Disposition> DispositionList{get;set;}
-        public List<KnowledgeElement> Knowledges{get;set;}
-        public List<SkillLevel> Skills{get;set;}
+        public List<Disposition> DispositionList = new List<Disposition>();
+        public List<KnowledgeElement> Knowledges = new List<KnowledgeElement>();
+        public List<SkillLevel> Skills = new List<SkillLevel>();
 
 
         public CompetencyBuilderViewModel Cbvm {get; set;}
@@ -69,10 +69,12 @@ namespace CDKST.Pages.Wizard
             var repoDisp = _UOW.GetRepositoryAsync<Disposition>();
             var repoK = _UOW.GetRepositoryAsync<KnowledgeElement>();
             var repoS = _UOW.GetRepositoryAsync<SkillLevel>();
+            //use my repo
             IEnumerable<Disposition> tempDispList = await repoDisp.GetListAsync();
-            IEnumerable<KnowledgeElement> tempKnowledgeList = await repoK.GetListAsync();
-            IEnumerable<SkillLevel> tempSkillList = await repoS.GetListAsync();
-            foreach (var disp in tempDispList)
+            List<Disposition> DispList = tempDispList.ToList();
+             _logger.LogInformation("DISPLISTCOUNT "+DispList.Count().ToString());
+             //make my list
+            foreach (var disp in DispList)
             {
                 foreach (var dispIndices in DispositionIndicies)
                 {
@@ -82,26 +84,11 @@ namespace CDKST.Pages.Wizard
                     }
                 }
             }
-            foreach (var know in tempKnowledgeList)
-            {
-                for (int i = 0; i < KSPairsIndicies.Length; i++)
-                {
-                    if(know.Id == KSPairsIndicies[i][0]){
-                           _logger.LogInformation("Adding a KNOWL");
-                        Knowledges.Add(know);
-                    }
-                }
+            //KSPAIRS
+            for(int i = 0; i< KSPairsIndicies.Length; i++){
+                
             }
-            foreach (var skillElement in tempSkillList)
-            {
-                for (int i = 0; i < KSPairsIndicies.Length; i++)
-                {
-                    if(skillElement.Id == KSPairsIndicies[i][1]){
-                           _logger.LogInformation("Adding a SKILL");
-                        Skills.Add(skillElement);
-                    }
-                }    
-            }
+            
         }
          public async Task<IActionResult>  OnPostAsync(){
 
@@ -118,7 +105,8 @@ namespace CDKST.Pages.Wizard
                 //fill it with what i want
                 Cbvm.CompetencyName = CompetencyName;
                 Cbvm.CompetencyDescription = CompetencyDescription;
-                Cbvm.DispositionIndicies = DispositionIndicies;               
+                Cbvm.DispositionIndicies = DispositionIndicies;  
+                Cbvm.KSPairsIndicies = KSPairsIndicies;             
                 //pack it up 
                 var serialized = JsonSerializer.Serialize(Cbvm);
                 //send it out
@@ -131,15 +119,15 @@ namespace CDKST.Pages.Wizard
 
                 //fill it with what i want
                 Cbvm.CompetencyName = CompetencyName;
-                _logger.LogInformation($"IN POST PAGE 2, Session out: {Cbvm.CompetencyName}");
+                _logger.LogInformation($"IN POST PAGE 6, Session out: {Cbvm.CompetencyName}");
                 Cbvm.CompetencyDescription = CompetencyDescription;
-                _logger.LogInformation($"IN POST PAGE 2, Session out: {Cbvm.CompetencyDescription}");
+                _logger.LogInformation($"IN POST PAGE 6, Session out: {Cbvm.CompetencyDescription}");
                 Cbvm.DispositionIndicies = DispositionIndicies;  
-                _logger.LogInformation($"IN POST PAGE 2, Session out: {Cbvm.DispositionIndicies}");              
-
+                _logger.LogInformation($"IN POST PAGE 6, Session out: {Cbvm.DispositionIndicies}");              
+                Cbvm.KSPairsIndicies = KSPairsIndicies;
                 //pack it up 
                 var serializedout = JsonSerializer.Serialize(Cbvm);
-                _logger.LogInformation($"IN POST PAGE 2, Serialized out: {serializedout.ToString()}");
+                _logger.LogInformation($"IN POST PAGE 6, Serialized out: {serializedout.ToString()}");
                 //send it out
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serializedout);                
             }
@@ -148,35 +136,10 @@ namespace CDKST.Pages.Wizard
             return RedirectToPage("/Wizard/Page6");
 
         }
-              private List<KnowledgeSelectorModel> GetKnowledgeDisplayList(List<KnowledgeElement> list){
-            List<KnowledgeSelectorModel> outlist = new List<KnowledgeSelectorModel>();
-
-            foreach(KnowledgeElement k in list){
-                KnowledgeSelectorModel ksm = new KnowledgeSelectorModel();
-                ksm.Id = k.Id;
-                ksm.Name = k.Name;
-                ksm.Description = k.Description;
-                ksm.CartesianIndex = k.CartesianIndex;
-                ksm.SemioticIndex = k.SemioticIndex;
-                ksm.Etymology = k.Etymology;
-                ksm.Selected = false;
-                //I dont know what it will do if i dont assign it here. I think its fair to say if you picked the knowledge element you need at least skill level 1.
-                ksm.SkillLevel = 0;
-                outlist.Add(ksm);
-            }
-
-            return outlist;
-        } 
-
+              
     }
 }
 
 
 
-        // public int Id {get; set;}
-        // public string Name { get; set;}
-        // public string Description {get; set;}
-        // public string CartesianIndex{get; set;}
-        // public string SemioticIndex{get; set;}
-        // public string Etymology {get; set;}
-        // public bool Selected {get; set;}
+   

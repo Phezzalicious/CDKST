@@ -103,7 +103,7 @@ namespace CDKST.Pages.Wizard
                 Cbvm.DispositionIndicies = DispositionIndicies;  
                 _logger.LogInformation($"IN POST PAGE 3, Session in: {DispositionIndicies[0]}");
                 _logger.LogInformation($"IN POST PAGE 3, Session out: {Cbvm.DispositionIndicies[0]}");              
-
+                Cbvm.KSPairsIndicies = new int[0];
                 //pack it up 
                 var serializedout = JsonSerializer.Serialize(Cbvm);
                 _logger.LogInformation($"IN POST PAGE 3, Serialized out: {serializedout.ToString()}");

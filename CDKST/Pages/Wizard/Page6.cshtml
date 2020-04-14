@@ -7,7 +7,7 @@
 
 <div class="jumbotron text-center">
     <h1 class="mx-auto my-0 text-uppercase">Review</h1>
-<h3 class="font-weight-bolder">Please select the Knowledge Elements required and specify the Skill Level</h3>
+<h3 class="font-weight-bolder">Please Confirm the makeup of your Competency</h3>
 </div>
 
 
@@ -46,14 +46,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @* @foreach (var disp in Model.DispositionList)
+                    @foreach (var disp in Model.DispositionList)
                     {
                         <td>@disp.Id</td>
                         <td>@disp.Name</td>
                         <td>@disp.Category</td>
                         <td>@disp.Discipline</td>
                         <td>@disp.Description</td>
-                    } *@
+                    }
                 </tbody>
             </table>
         </div>
@@ -68,13 +68,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @* @for(int i = 0; i< Model.Knowledges.Count; i++)
-                    {
-                        <td></td>
-                        <td>@Model.Knowledges[i].Name</td>
-                        <td>@Model.Skills[i].Name</td>
-                        
-                    } *@
+              
                 </tbody>
             </table>
             

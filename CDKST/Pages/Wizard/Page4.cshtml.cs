@@ -33,7 +33,7 @@ namespace CDKST.Pages.Wizard
         public int[] DispositionIndicies {get; set;}
         [BindProperty]
         [Display(Name="KSPairsIndicies")]        
-        public int[][] KSPairsIndicies {get; set;}
+        public int[] KSPairsIndicies {get; set;}
         
         
     
@@ -78,7 +78,8 @@ namespace CDKST.Pages.Wizard
             _logger.Log(LogLevel.Information, "Page 4 onGet");
             _logger.LogInformation($"COMPNAME: {CompetencyName}");
             _logger.LogInformation($"COMPDESCR: {CompetencyDescription}");
-            _logger.LogInformation($"DISPINDICE: {DispositionIndicies}");
+            _logger.LogInformation($"DISPINDICE: {DispositionIndicies[0]}");
+            _logger.LogInformation($"KDISPLIST: {KnowledgeDisplayList.Count()}");
 
 
 
@@ -87,15 +88,26 @@ namespace CDKST.Pages.Wizard
          public async Task<IActionResult>  OnPostAsync(){
 
             _logger.LogInformation("IN ON POST ASYNC");
+            _logger.LogInformation("KNOWLEDGEDISPLAYLIST: "+ KnowledgeDisplayList.Count());
 
             await HttpContext.Session.LoadAsync();
             //store my indicies, first dimension is each knowledge selector model and second dimension is knowledge - skill id
-             int[][] temp = new int[0][];
-             for(int i =0; i < KnowledgeDisplayList.Count; i++){
-                 temp[i][0] = KnowledgeDisplayList[i].Id;
-                 temp[i][1] = KnowledgeDisplayList[i].SkillLevel;
-             }          
-             KSPairsIndicies = temp;     
+             List<int> temp = new List<int>();
+            foreach(KnowledgeSelectorModel ksm in KnowledgeDisplayList)
+            {
+                 _logger.LogInformation("In my FOREACH");
+                if(ksm.Selected){
+                    temp.Add(ksm.Id);
+                    temp.Add(ksm.SkillLevel);
+                    _logger.LogInformation($"Added: {ksm.Id.ToString()} to the indicies");
+                    _logger.LogInformation(ksm.Name);
+                }
+            }      
+            KSPairsIndicies =  temp.ToArray();       
+        
+            //_logger.LogInformation("temp : " + temp[0]);
+            //_logger.LogInformation("KS : " + KSPairsIndicies[0]);
+          
             //is my session variable null?
             if(string.IsNullOrEmpty(HttpContext.Session.GetString(SerializedCompetencyJSONKey)))
             {
@@ -124,10 +136,10 @@ namespace CDKST.Pages.Wizard
                 _logger.LogInformation($"IN POST PAGE 4, Session out: {CompetencyDescription}");
                 _logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.CompetencyDescription}");
                 Cbvm.DispositionIndicies = DispositionIndicies;  
-                _logger.LogInformation($"IN POST PAGE 4, Session out: {DispositionIndicies}");
+                _logger.LogInformation($"IN POST PAGE 4, Session out: {DispositionIndicies[0]}");
                 _logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.DispositionIndicies}");              
-                Cbvm.KSPairsIndicies = temp;  
-                _logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.KSPairsIndicies}");
+                Cbvm.KSPairsIndicies = KSPairsIndicies;  
+                //_logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.KSPairsIndicies[0]}");
                 //pack it up 
                 var serializedout = JsonSerializer.Serialize(Cbvm);
                 _logger.LogInformation($"IN POST PAGE 4, Serialized out: {serializedout.ToString()}");
@@ -164,10 +176,3 @@ namespace CDKST.Pages.Wizard
 
 
 
-        // public int Id {get; set;}
-        // public string Name { get; set;}
-        // public string Description {get; set;}
-        // public string CartesianIndex{get; set;}
-        // public string SemioticIndex{get; set;}
-        // public string Etymology {get; set;}
-        // public bool Selected {get; set;}

@@ -72,7 +72,7 @@ namespace CDKST.Pages.Wizard
                 cbvm.CompetencyDescription = CompetencyDescription;
                 cbvm.ConstituentCompetenciesIndicies = new int[0];
                 cbvm.DispositionIndicies = new int[0];
-                cbvm.KSPairsIndicies = new int[0][];
+                cbvm.KSPairsIndicies = new int[0];
 
                 var serializedout = JsonSerializer.Serialize(cbvm);
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serializedout);

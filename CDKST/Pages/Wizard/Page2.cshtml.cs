@@ -113,6 +113,7 @@ namespace CDKST.Pages.Wizard
                 _logger.LogInformation($"IN POST PAGE 2, Session out: {Cbvm.CompetencyDescription}");
                 Cbvm.DispositionIndicies = DispositionIndicies;                
                  _logger.LogInformation($"IN POST PAGE 2, Session out: {Cbvm.DispositionIndicies}");
+                 Cbvm.KSPairsIndicies = new int[0];
                 var serializedout = JsonSerializer.Serialize(Cbvm);
                 _logger.LogInformation($"IN POST PAGE 2, Serialized out: {serializedout.ToString()}");
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serializedout);                

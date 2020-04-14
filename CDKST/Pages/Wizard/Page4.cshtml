@@ -42,26 +42,26 @@
                     </thead>
                     <tbody>
                         @* https://www.learnrazorpages.com/razor-pages/forms/checkboxes#collections-of-complex-objects *@
-                        @foreach (var element in Model.KnowledgeDisplayList)
+                        @for (int i = 0;i<Model.KnowledgeDisplayList.Count();i++)
                         {
                             <tr>
-                                <td><input asp-for="@element.Selected"></td>
+                                <td><input asp-for="@Model.KnowledgeDisplayList[i].Selected"></td>
                                 <th scope="row">
                                     <input type="hidden" 
-                                            asp-for="@element.Id" />
-                                    @element.Id
+                                            asp-for="@Model.KnowledgeDisplayList[i].Id" />
+                                    @Model.KnowledgeDisplayList[i].Id
                                 </th>
                                 <td>
                                     <input type="hidden" 
-                                            asp-for="@element.Name" />
-                                    @element.Name
+                                            asp-for="@Model.KnowledgeDisplayList[i].Name" />
+                                    @Model.KnowledgeDisplayList[i].Name
                                 </td>
-                                <td>@element.Description</td>
-                                <td>@element.CartesianIndex</td>
-                                <td>@element.SemioticIndex</td>
-                                <td>@element.Etymology</td>
+                                <td>@Model.KnowledgeDisplayList[i].Description</td>
+                                <td>@Model.KnowledgeDisplayList[i].CartesianIndex</td>
+                                <td>@Model.KnowledgeDisplayList[i].SemioticIndex</td>
+                                <td>@Model.KnowledgeDisplayList[i].Etymology</td>
                                 <td>  
-                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" asp-for="@element.SkillLevel">
+                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" asp-for="@Model.KnowledgeDisplayList[i].SkillLevel">
                                         <option selected>Choose...</option>
                                         @foreach (var level in Model.Slist)
                                         {
@@ -78,8 +78,22 @@
                 @* These are important to take advantage of the BindProperty *@
                 <input type="hidden" asp-for="CompetencyName">
                 <input type="hidden" asp-for="CompetencyDescription">
-                <input type="hidden" asp-for="DispositionIndicies">
-                <input type="hidden" asp-for="KSPairsIndicies">
+                @for(int i = 0; i < Model.DispositionIndicies.Count(); i++)
+                {
+                    <input type="hidden" asp-for="DispositionIndicies[i]">
+                }
+                @for (int i = 0; i < Model.KnowledgeDisplayList.Count(); i++)
+                {
+                    <input type="hidden" asp-for="KnowledgeDisplayList[i].Id">
+                    <input type="hidden" asp-for="KnowledgeDisplayList[i].Name">
+                    <input type="hidden" asp-for="KnowledgeDisplayList[i].Description">
+                    <input type="hidden" asp-for="KnowledgeDisplayList[i].CartesianIndex">
+                    <input type="hidden" asp-for="KnowledgeDisplayList[i].SemioticIndex">
+                    <input type="hidden" asp-for="KnowledgeDisplayList[i].Etymology">
+                    <input type="hidden" asp-for="KnowledgeDisplayList[i].Selected">
+                    <input type="hidden" asp-for="KnowledgeDisplayList[i].SkillLevel">         
+                }
+         
                 <button name="submit" type="submit" class="btn btn-primary">
                     Review
                     <i class="fas fa-angle-double-right"></i>
