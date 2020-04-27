@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using CDKST.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using CDKST.Areas.Identity.Data;
 
 namespace CDKST.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<Member> _userManager;
-        private readonly SignInManager<Member> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
         public IndexModel(
-            UserManager<Member> userManager,
-            SignInManager<Member> signInManager)
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -33,12 +33,21 @@ namespace CDKST.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Full name")]
+            public string Name { get; set; }
+
+            [Required]
+            [Display(Name = "Birth Date")]
+            [DataType(DataType.Date)]
+            public DateTime DOB { get; set; }
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
         }
 
-        private async Task LoadAsync(Member user)
+        private async Task LoadAsync(IdentityUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
@@ -47,6 +56,7 @@ namespace CDKST.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+              
                 PhoneNumber = phoneNumber
             };
         }
@@ -87,6 +97,12 @@ namespace CDKST.Areas.Identity.Pages.Account.Manage
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
             }
+       
+     
+
+            await _userManager.UpdateAsync(user);
+
+
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

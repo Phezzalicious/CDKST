@@ -2,20 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CDKST.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CDKST.Areas.Identity.Data
 {
-    public class IdentityContext : IdentityDbContext<Member>
+    public class IdentityContext : IdentityDbContext<IdentityUser>
     {
         public IdentityContext(DbContextOptions<IdentityContext> options)
             : base(options)
         {
         }
-    public DbSet<Member> Members{get;set;}
+        //public DbSet<IdentityUser> IdentityUsers { get; set;}
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

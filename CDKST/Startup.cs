@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using CDKST.Areas.Identity.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,13 +21,13 @@ using MyData.Data;
 using MyRepo.DependencyInjection;
 using CDKST.Middleware;
 using Microsoft.AspNetCore.HttpOverrides;
-
+using CDKST.Services; //<ProjectReference Include="..\EmailLibrary\EmailLibrary.csproj" />
 namespace CDKST
 {
     public class Startup
     {
 
-        IWebHostEnvironment Environment{ get; }
+        IWebHostEnvironment Environment { get; }
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
@@ -42,38 +43,73 @@ namespace CDKST
 
             services.AddDistributedMemoryCache();
 
-            services.AddSession(options => {
+            services.AddSession(options =>
+            {
                 options.IdleTimeout = TimeSpan.FromSeconds(30);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddRazorPages();
+
 
             //add database and add UnitOfWork using Wizard Context
             services.AddDbContext<IdentityContext>(options =>
                options.UseMySql(Configuration.GetConnectionString("IdentityContextSQLServer"), mySqlOptions =>
-                    mySqlOptions.ServerVersion(new Version(5, 7, 29), ServerType.MySql)))
-                       .AddUnitOfWork<IdentityContext>();
+                    mySqlOptions.ServerVersion(new Version(5, 7, 29), ServerType.MySql)));
+        
             services.AddDbContext<CDKSTContext>(options =>
                options.UseMySql(Configuration.GetConnectionString("CDKSTContextSQLServer"), mySqlOptions =>
                     mySqlOptions.ServerVersion(new Version(5, 7, 29), ServerType.MySql)))
                        .AddUnitOfWork<CDKSTContext>();
+                
+            services.AddDefaultIdentity<IdentityUser>(
+              options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<IdentityContext>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
 
-            // if(Environment.IsDevelopment())
-            // {
-            //     //add database and add UnitOfWork using Wizard Context
-            //     services.AddDbContext<WizardContext>(options => 
-            //         options.UseSqlite(Configuration.GetConnectionString("WizardContextLocal")))
-            //             .AddUnitOfWork<WizardContext>();
-            // }
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = false;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+        // Cookie settings
+        options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+        
+
+            // requires
+            // using Microsoft.AspNetCore.Identity.UI.Services;
+            // using WebPWrecover.Services;
+            services.AddTransient<IEmailSender, EmailSender>();
+           
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //get the database to migrate/update
-            using(var servicescope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (var servicescope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 servicescope.ServiceProvider.GetService<CDKSTContext>().Database.Migrate();
             }
@@ -84,7 +120,7 @@ namespace CDKST
             }
             else
             {
-                app.UseDeveloperExceptionPage();                
+                app.UseDeveloperExceptionPage();
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
@@ -92,7 +128,7 @@ namespace CDKST
 
             //this can cause headaches when testing locally.
             //uncomment for deploy
-              app.UseForwardedHeaders(new ForwardedHeadersOptions
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
@@ -103,10 +139,11 @@ namespace CDKST
             app.UseHttpContextItemsMiddleware();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
-            app.UseSession();            
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
