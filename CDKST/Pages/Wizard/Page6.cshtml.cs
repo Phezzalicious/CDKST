@@ -126,36 +126,26 @@ namespace CDKST.Pages.Wizard
                         }
                     }
                 }
-            }
-         
-            
+            }  
         }
          public async Task<IActionResult>  OnPostAsync(){//In this method I will have confirmed the form data and save the correct competency to the database
-
             _logger.LogInformation("IN ON POST ASYNC PAGE 6");
             _logger.LogInformation(KSPairsIndicies.Count().ToString());
-           
             await HttpContext.Session.LoadAsync();
-
              //Reset these just in case, Pretty sure this is never necessary
             DispositionList = new List<Disposition>();
             KnowledgeElementList = new List<KnowledgeElement>();
             SkillLevelList = new List<SkillLevel>();
-         
              //Makes the (RepositoryAsyncs) I need for later use. Disp,Know,Skill
             var repoDisp = _UOW.GetRepositoryAsync<Disposition>();
             var repoK = _UOW.GetRepositoryAsync<KnowledgeElement>();
             var repoS = _UOW.GetRepositoryAsync<SkillLevel>();
-
-
             //*********DISPOSITION SECTION**********\\
-
             //Dispositions
             IEnumerable<Disposition> tempDispList = await repoDisp.GetListAsync();
             //holds all the dispositions from the database
             List<Disposition> DispList = tempDispList.ToList();
              _logger.LogInformation("DISPLISTCOUNT "+DispList.Count().ToString());
-
              //make my DispositionList
             foreach (var disp in DispList)
             {
@@ -167,21 +157,17 @@ namespace CDKST.Pages.Wizard
                     }
                 }
             }
-            
             //***************KSPAIRS SECTION*****************\\
-
             //Knowledge
              IEnumerable<KnowledgeElement> tempKnowledgeList = await repoK.GetListAsync();
              //Holds all knowledgeElements from the database 
             List<KnowledgeElement> KnowledgeList = tempKnowledgeList.ToList();
                             //_logger.LogInformation("KNOWLISTCOUNT "+KnowledgeList.Count().ToString());
-
               //Skill
              IEnumerable<SkillLevel> tempSkillList = await repoS.GetListAsync();
              //Holds all skills from the database
             List<SkillLevel> SkillList = tempSkillList.ToList();
                             //_logger.LogInformation("SKILLLISTCOUNT "+SkillList.Count().ToString());
-
              //KnowledgeElementList and SkillLevelList creation 
             for(int i = 0; i< KSPairsIndicies.Length; i++){
                 //Even indices are my knowledges 
@@ -203,29 +189,23 @@ namespace CDKST.Pages.Wizard
                     }
                 }
             }
-
             if(string.IsNullOrEmpty(HttpContext.Session.GetString(SerializedCompetencyJSONKey)))
             {
                 //if so, make a new one 
                 Cbvm = new CompetencyBuilderViewModel();
-
                 //fill it with what i want
                 Cbvm.CompetencyName = CompetencyName;
                 Cbvm.CompetencyDescription = CompetencyDescription;
                 Cbvm.DispositionIndicies = DispositionIndicies; 
                 Cbvm.KSPairsIndicies = KSPairsIndicies;  
-
                 //pack it up 
                 var serialized = JsonSerializer.Serialize(Cbvm);
-
                 //send it out
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serialized);
-
             }else {
                 //open my object
                 var serializedin = HttpContext.Session.GetString(SerializedCompetencyJSONKey);
                 Cbvm = JsonSerializer.Deserialize<CompetencyBuilderViewModel>(serializedin);
-
                 //fill it with what i want
                 Cbvm.CompetencyName = CompetencyName;
                 Cbvm.CompetencyDescription = CompetencyDescription;
@@ -238,22 +218,14 @@ namespace CDKST.Pages.Wizard
                 // _logger.LogInformation($"IN POST PAGE 4, Session out: {DispositionIndicies[0]}");
                 // _logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.DispositionIndicies}");                
                 //_logger.LogInformation($"IN POST PAGE 4, Session out: {Cbvm.KSPairsIndicies[0]}");
-
                 //pack it up 
                 var serializedout = JsonSerializer.Serialize(Cbvm);
                 //_logger.LogInformation($"IN POST PAGE 4, Serialized out: {serializedout.ToString()}");
-
                 //send it out
                 HttpContext.Session.SetString(SerializedCompetencyJSONKey, serializedout);                
             }
-
-     
-           
-           
             await makeAndCreateCompetency();
-
             return RedirectToPage("/Wizard/Confirmed");
-
         }
         async Task makeAndCreateCompetency(){
             IDMachine ID = new IDMachine();
@@ -266,8 +238,6 @@ namespace CDKST.Pages.Wizard
             List<CompetencyDisposition> allCDs = allCDsIE.ToList();
             IEnumerable<KSPair> allKSIE = await repoKS.GetListAsync();
             List<KSPair> allKS = allKSIE.ToList();
-
-
             List<CompetencyDisposition> forMyNewCompDISP = new List<CompetencyDisposition>();
             foreach(var item in DispositionList)
                 {
@@ -295,7 +265,6 @@ namespace CDKST.Pages.Wizard
                 //             KnowledgeElement = knowledgeElements[0],
                 //             SkillLevel = skillLevels[5],
                 //         },
-           
              AtomicCompetency newComp = new AtomicCompetency{ 
                         Id = ID.getNewID(allComps),
                         Name = CompetencyName,
@@ -304,16 +273,9 @@ namespace CDKST.Pages.Wizard
                         KSPairs = forMyNewCompKS
                     };
                     await repoC.AddAsync(newComp);
-
                     int whytIsThisAnInt = _UOW.SaveChanges();
-         
-        }
-        
-       
-              
-    }
-  
-    
+        }         
+    }    
 }
 
 
